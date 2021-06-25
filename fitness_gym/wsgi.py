@@ -1,16 +1,16 @@
 """
-WSGI config for fitness_subscription project.
+WSGI config for fitness_gym project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
 For more information on this file, see
-https://docs.djangoproject.com/en/3.2/howto/deployment/wsgi/
+https://docs.djangoproject.com/en/3.0/howto/deployment/wsgi/
 """
 
 import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fitness_subscription.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fitness_gym.settings')
 
 application = get_wsgi_application()
