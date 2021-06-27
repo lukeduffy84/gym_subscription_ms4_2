@@ -1,0 +1,496 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <!-- LINKS START -->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <link
+         rel="stylesheet"
+         href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+         crossorigin="anonymous"
+         />
+      <link
+         rel="stylesheet"
+         href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+         crossorigin="anonymous"
+         />
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+         />
+      <script
+         src="https://code.jquery.com/jquery-3.6.0.min.js"
+         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+         crossorigin="anonymous"
+         ></script>
+      <script
+         src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+         crossorigin="anonymous"
+         ></script>
+      <script
+         src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+         crossorigin="anonymous"
+         ></script>
+      <!-- LINKS END -->
+      <title>Checkout</title>
+   </head>
+   <body>
+      <!-- ===== HEADER SECTION START ===== -->
+      <header class="container-fluid fixed-header">
+         <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex align-items-center">
+            <div
+               class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left"
+               >
+               <a href="/" class="nav-link main-link logo-styling"
+                  >Luke Duffy <span class="underlineTheme"> Fitness</span></a
+                  >
+            </div>
+            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+               <form  >
+                  <div class="input-group w-100">
+                     <input
+                        class="form-control border-dark rounded-0"
+                        type="text"
+                        placeholder="Search Programs"
+                        />
+                     <div class="input-group-append">
+                        <button
+                           class="form-control btn btn-black border-dark rounded-0"
+                           type="submit"
+                           >
+                        <span class="icon">
+                        <i class="fas fa-search" aria-hidden="true"></i>
+                        </span>
+                        </button>
+                     </div>
+                  </div>
+               </form>
+            </div>
+            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+               <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+                  <li class="list-inline-item dropdown">
+                     <a
+                        class="text-black nav-link"
+                        href="#"
+                        id="user-options"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        >
+                        <div class="text-center">
+                           <div>
+                              <i class="fas fa-user fa-lg" aria-hidden="true"></i>
+                           </div>
+                           <p class="my-0 logo-font">My Account</p>
+                        </div>
+                     </a>
+                     <div
+                        class="dropdown-menu border-0"
+                        aria-labelledby="user-options"
+                        >
+                        <a href="{% url 'register' %}" class="dropdown-item logo-font">Register</a>
+                        <a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
+                        {% if islogin %}
+                        <a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Product</a>
+                        {% endif %}
+                     </div>
+                  </li>
+                  <li class="list-inline-item">
+                     <a class="text-black nav-link" href = "{% url 'shopping' %}">
+                        <div class="text-center">
+                           <div>
+                              <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
+                           </div>
+                           <p class="my-0 logo-font">${{cart_price}}</p>
+                        </div>
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="row bg-white">
+            <nav class="navbar navbar-expand-lg navbar-light w-100">
+               <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#main-nav"
+                  aria-controls="main-nav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation"
+                  >
+               <span class="navbar-toggler-icon"></span>
+               </button>
+               <ul class="list-unstyled list-inline mt-3 mt-md-0">
+                  <li class="list-inline-item">
+                     <a
+                        class="text-black nav-link d-block d-lg-none"
+                        href="#"
+                        id="mobile-search"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        >
+                        <div class="text-center">
+                           <div>
+                              <i class="fas fa-search fa-lg" aria-hidden="true"></i>
+                           </div>
+                           <p class="my-0">Search</p>
+                        </div>
+                     </a>
+                     <div
+                        class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0"
+                        aria-labelledby="mobile-search"
+                        >
+                        <form class="form"  >
+                           <div class="input-group w-100">
+                              <input
+                                 class="form-control border border-dark rounded-0"
+                                 type="text"
+                                 placeholder="Search our site"
+                                 />
+                              <div class="input-group-append">
+                                 <button
+                                    class="
+                                    form-control form-control
+                                    btn btn-black
+                                    border border-dark
+                                    rounded-0
+                                    "
+                                    type="submit"
+                                    >
+                                 <span class="icon">
+                                 <i class="fas fa-search" aria-hidden="true"></i>
+                                 </span>
+                                 </button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </li>
+                  <li class="list-inline-item dropdown">
+                     <a
+                        class="text-black nav-link d-block d-lg-none"
+                        href="#"
+                        id="user-options-mob"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        >
+                        <div class="text-center">
+                           <div>
+                              <i class="fas fa-user fa-lg" aria-hidden="true"></i>
+                           </div>
+                           <p class="my-0">My Account</p>
+                        </div>
+                     </a>
+                     <div
+                        class="dropdown-menu border-0"
+                        aria-labelledby="user-options-mob"
+                        >
+                        <a href="{% url 'register' %}" class="dropdown-item">Register</a>
+                        <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+                        {% if islogin %}
+                        <a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Product</a>
+                        {% endif %}
+                     </div>
+                  </li>
+                  <li class="list-inline-item">
+                     <a class="text-black nav-link d-block d-lg-none" href = "{% url 'shopping' %}">
+                        <div class="text-center">
+                           <div>
+                              <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
+                           </div>
+                           <p class="my-0">${{cart_price}}</p>
+                        </div>
+                     </a>
+                  </li>
+               </ul>
+               <div class="collapse navbar-collapse mt-3" id="main-nav">
+                  <ul class="navbar-nav w-auto mx-auto">
+                     <li class="nav-item d-block d-md-none">
+                        <a
+                           class="logo-font font-weight-bold nav-link text-black mr-5"
+                           href="/"
+                           id="home-link"
+                           >
+                        Home
+                        </a>
+                     </li>
+                     <li class="nav-item dropdown">
+                        <a
+                           class="logo-font font-weight-bold nav-link text-black mr-5"
+                           href="#"
+                           id="all-products-link"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                           >
+                        Fitness Programs
+                        </a>
+                        <div
+                           class="dropdown-menu border-0"
+                           aria-labelledby="all-products-link"
+                           >
+                           <a href = "{% url 'fitness' view_by='all' %}" class="logo-font dropdown-item"
+                              >By Price</a
+                              >
+                           <a href = "{% url 'fitness' view_by='all' %}" class="logo-font dropdown-item"
+                              >By Category</a
+                              >
+                           <a href = "{% url 'fitness' view_by='all' %}" class="logo-font dropdown-item"
+                              >Fitness Programs</a
+                              >
+                        </div>
+                     </li>
+                     <li class="nav-item">
+                        <a
+                           href = "{% url 'supplements' %}"
+                           class="logo-font font-weight-bold nav-link text-black mr-5"
+                           id="supplements-link"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                           >
+                        Supplements
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a
+                           href = "{% url 'merchandise' %}"
+                           class="logo-font font-weight-bold nav-link text-black mr-5"
+                           id="merchandise-link"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                           >
+                        Merchandise
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a
+                           href = "{% url 'programs' %}"
+                           class="logo-font font-weight-bold nav-link text-black"
+                           id="online-coaching-link"
+                           aria-haspopup="true"
+                           aria-expanded="false"
+                           >
+                        Online Coaching
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+            </nav>
+         </div>
+      </header>
+      <div class="container header-container">
+         <div class="row">
+            <div class="col"></div>
+         </div>
+      </div>
+      <!-- ===== HEADER SECTION END ===== -->
+      <!-- ===== SHOPPING BAG START ===== -->
+      <div class="container">
+         <div class="row">
+            <div class="col">
+               <hr>
+               <h2 class="logo-font mb-4">Checkout</h2>
+               <hr>
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-12 col-lg-6 order-lg-last mb-5">
+               <p class="text-muted">Order Summary</p>
+               <div class="row">
+                  <div class="col-7 offset-2">
+                     <p class="mb-1 mt-0 small text-muted">Item</p>
+                  </div>
+                  <div class="col-3 text-right">
+                     <p class="mb-1 mt-0 small text-muted">Subtotal</p>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-2 mb-1">
+                     <a href="/products/1/">
+                     <img class="w-100" src="{{data.image_link}}" alt="">
+                     </a>
+                  </div>
+                  <div class="col-7">
+                     <p class="my-0"><strong>{{data.name}}</strong></p>
+                     <p class="my-0 small text-muted">Qty: {{data.quantity}}</p>
+                  </div>
+                  <div class="col-3 text-right">
+                     <p class="my-0 small text-muted">${{data.subtotal}}</p>
+                  </div>
+               </div>
+               <hr class="my-0">
+               <div class="row text-black text-right">
+                  <div class="col-7 offset-2">
+                     <p class="my-0">Order Total:</p>
+                     <p class="my-0">Delivery:</p>
+                     <p class="my-0">Grand Total:</p>
+                  </div>
+                  <div class="col-3">
+                     <p class="my-0">${{data.subtotal}}</p>
+                     <p class="my-0">$2.50</p>
+                     <p class="my-0"><strong>${{data.total}}</strong></p>
+                  </div>
+               </div>
+            </div>
+            <div class="col-12 col-lg-6">
+               <p class="text-muted">Please fill out the form below to complete your order</p>
+               <form id="payment-form" action="{% url 'checkout' %}" method="POST" enctype="multipart/form-data">
+                  <input type="hidden">
+                  <fieldset class="rounded px-3 mb-5">
+                     <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
+                     <div id="div_id_full_name" class="form-group">
+                        <div class="">
+                           <input type="text" name="full_name" maxlength="50" autofocus="" placeholder="Full Name *" class="stripe-style-input textinput textInput form-control" required="" id="id_full_name">
+                        </div>
+                     </div>
+                     <div id="div_id_email" class="form-group">
+                        <div class="">
+                           <input type="email" name="email" maxlength="254" placeholder="Email Address *" class="stripe-style-input emailinput form-control" required="" id="id_email">
+                        </div>
+                     </div>
+                  </fieldset>
+                  <fieldset class="rounded px-3 mb-5">
+                     <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
+                     <div id="div_id_phone_number" class="form-group">
+                        <div class="">
+                           <input type="text" name="phone_number" maxlength="20" placeholder="Phone Number *" class="stripe-style-input textinput textInput form-control" required="" id="id_phone_number">
+                        </div>
+                     </div>
+                     <div id="div_id_street_address1" class="form-group">
+                        <div class="">
+                           <input type="text" name="street_address1" maxlength="80" placeholder="Street Address 1 *" class="stripe-style-input textinput textInput form-control" required="" id="id_street_address1">
+                        </div>
+                     </div>
+                     <div id="div_id_street_address2" class="form-group">
+                        <div class="">
+                           <input type="text" name="street_address2" maxlength="80" placeholder="Street Address 2" class="stripe-style-input textinput textInput form-control" id="id_street_address2">
+                        </div>
+                     </div>
+                     <div id="div_id_town_or_city" class="form-group">
+                        <div class="">
+                           <input type="text" name="town_or_city" maxlength="40" placeholder="Town or City *" class="stripe-style-input textinput textInput form-control" required="" id="id_town_or_city">
+                        </div>
+                     </div>
+                     <div id="div_id_county" class="form-group">
+                        <div class="">
+                           <input type="text" name="county" maxlength="80" placeholder="County" class="stripe-style-input textinput textInput form-control" id="id_county">
+                        </div>
+                     </div>
+                     <div id="div_id_postcode" class="form-group">
+                        <div class="">
+                           <input type="text" name="postcode" maxlength="20" placeholder="Postal Code" class="stripe-style-input textinput textInput form-control" id="id_postcode">
+                        </div>
+                     </div>
+                     <div id="div_id_country" class="form-group">
+                        <div class="">
+                           <select name="country" class="stripe-style-input lazyselect form-control" required="" id="id_country">
+                              <option value="" selected="">Country *</option>
+                              <option value="AF">Afghanistan</option>
+                           </select>
+                        </div>
+                     </div>
+                     <div class="form-check form-check-inline float-right mr-0">
+                        <label class="form-check-label" for="id-save-info">
+                        <a class="text-info" href="{% url 'register' %}">Create an account</a> or 
+                        <a class="text-info" href="{% url 'login' %}">login</a> to save this information
+                        </label>
+                     </div>
+                  </fieldset>
+                  <fieldset class="px-3">
+                     <legend class="fieldset-label small text-black px-2 w-auto"><strong>Payment</strong></legend>
+                     <!-- A Stripe card element will go here -->
+					<div class="mt-2 row w-100 ml-lg-5 ml-0 justify-content-center justify-content-lg-start ">
+						<input type="text" name="cardnumber" class="stripe-style-input textinput textInput form-control" placeholder="Enter 16 digit Card Number" required autofocus >
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+	
+					</div>
+					<div class="mt-2 row w-100 ml-lg-5 ml-0 justify-content-center justify-content-lg-start ">
+						<input type="text" class="stripe-style-input textinput textInput form-control" name="expmonth" placeholder="Enter card expiry month MM" required> </div>
+					<div class="mt-2 row w-100 ml-lg-5 ml-0 justify-content-center justify-content-lg-start ">
+						<input type="text" class=" stripe-style-input textinput textInput form-control" name="expyear" placeholder="Enter card expiry year date last two digit YY" required>
+					</div>
+					<div class="mt-2 row w-100 ml-lg-5 ml-0 justify-content-center justify-content-lg-start ">
+						<input type="password" class=" stripe-style-input textinput textInput form-control" name="card_cvv" placeholder="Enter card CVV number " required>
+					</div>
+                  </fieldset>
+                  <div class="submit-button text-right mt-5 mb-2">
+                     <a href = "{% url 'shopping' %}" class="btn btn-outline-black rounded-0">
+                     <span class="icon">
+                     <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                     </span>
+                     <span class="font-weight-bold">Adjust Bag</span>
+                     </a>
+                     <button id="submit-button" class="btn btn-black rounded-0">
+                     <span class="font-weight-bold">Complete Order</span>
+                     <span class="icon">
+                     <i class="fas fa-lock" aria-hidden="true"></i>
+                     </span>
+                     </button>
+                     <p class="small text-danger my-0">
+                        <span class="icon">
+                        <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+                        </span>
+                        <span>Your card will be charged <strong>${{data.total}}</strong></span>
+                     </p>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <!-- ===== SHOPPING BAG END ===== -->
+      <!-- ===== FOOTER SECTION START ===== -->
+      <footer class="container-fluid" id="footer">
+         <div class="row text-center text-black footer-icons">
+            <div class="col-12 mt-4">
+               <h3 class="font-weight-bold logo-font">LUKE DUFFY <span class="underlineTheme"> FITNESS</span></h3>
+            </div>
+            <div class="col mt-1">
+               <a
+                  href="https://www.facebook.com/"
+                  target="_blank"
+                  class="footer-icon"
+               >
+                  <i class="fab fa-facebook-f social-icon" aria-hidden="true"></i>
+               </a>
+                     <a href="https://www.instagram.com/" target="_blank" class="footer-icon">
+                         <i class="fab fa-instagram social-icon" aria-hidden="true"></i>
+                     </a>
+                     <a href="https://www.medium.com/" class="footer-icon">
+                         <i class="fab fa-medium social-icon" aria-hidden="true"></i>
+                     </a>
+                     <a href="https://twitter.com/" class="footer-icon">
+                         <i class="fab fa-twitter social-icon" aria-hidden="true"></i>
+                     </a>
+                 </div>
+             </div>
+             <div class="row text-center text-black footer-links mt-3">
+         </div>
+         <!-- <div class="row text-center text-black footer-links">
+            <div class="col">
+               <a
+                  href = "{% url 'blogs' %}"
+                  class="text-uppercase font-weight-bold footer-links"
+                  >View Blog</a
+               >
+            </div>
+         </div> -->
+         <div class="row mt-2 text-center text-black copyright-text">
+            <div class="col">
+               <p>© Luke Duffy Fitness 2021</p>
+            </div>
+         </div>
+      </footer>
+      </div>
+      <!-- ===== FOOTER SECTION END ===== -->
+   </body>
+</html>
