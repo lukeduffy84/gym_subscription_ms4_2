@@ -1,0 +1,607 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- LINKS START -->
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+			integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+			crossorigin="anonymous"
+		></script>
+		<link
+			href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			href="assets/js/bootstrap-icons/bootstrap-icons.css"
+			rel="stylesheet"
+		/>
+		<link href="assets/js/swiper/swiper-bundle.min.css" rel="stylesheet" />
+		<!-- LINKS END -->
+		<title>Testimonials</title>
+	</head>
+	<body>
+		<!-- ===== HEADER SECTION START ===== -->
+		<header class="container-fluid fixed-header">
+			<div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex align-items-center">
+				<div
+					class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left"
+				>
+					<a href="/" class="nav-link main-link logo-styling"
+						>Luke Duffy <span class="underlineTheme"> Fitness</span></a
+					>
+				</div>
+				<div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+					<form  action="{% url 'fitness' view_by='all' %}" method="POST" enctype="multipart/form-data">
+						<div class="input-group w-100">
+							<input
+								class="form-control border-dark rounded-0"
+name="searchstring"							type="text"				placeholder="Search Programs"
+							/>
+							<div class="input-group-append">
+								<button
+									class="form-control btn btn-black border-dark rounded-0"
+									type="submit"
+								>
+									<span class="icon">
+										<i class="fas fa-search" aria-hidden="true"></i>
+									</span>
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+					<ul class="list-inline list-unstyled text-center text-lg-right my-0">
+						<li class="list-inline-item dropdown">
+							<a
+								class="text-black nav-link"
+								href="#"
+								id="user-options"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							>
+								<div class="text-center">
+									<div>
+										<i class="fas fa-user fa-lg" aria-hidden="true"></i>
+									</div>
+									<p class="my-0 logo-font">My Account</p>
+								</div>
+							</a>
+							<div
+								class="dropdown-menu border-0"
+								aria-labelledby="user-options"
+							>
+								<a href="{% url 'register' %}" class="dropdown-item logo-font">Register</a>
+								<a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
+								{% if islogin %}
+								<a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Product</a>
+							{% endif %}
+							</div>
+						</li>
+						<li class="list-inline-item">
+							<a class="text-black nav-link" href = "{% url 'shopping' %}">
+								<div class="text-center">
+									<div>
+										<i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
+									</div>
+									<p class="my-0 logo-font">${{cart_price}}</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row bg-white">
+				<nav class="navbar navbar-expand-lg navbar-light w-100">
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-toggle="collapse"
+						data-target="#main-nav"
+						aria-controls="main-nav"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<ul class="list-unstyled list-inline mt-3 mt-md-0">
+						<li class="list-inline-item">
+							<a
+								class="text-black nav-link d-block d-lg-none"
+								href="#"
+								id="mobile-search"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							>
+								<div class="text-center">
+									<div>
+										<i class="fas fa-search fa-lg" aria-hidden="true"></i>
+									</div>
+									<p class="my-0">Search</p>
+								</div>
+							</a>
+							<div
+								class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0"
+								aria-labelledby="mobile-search"
+							>
+								<form class="form"  >
+									<div class="input-group w-100">
+										<input
+											class="form-control border border-dark rounded-0"
+											type="text"
+											
+											placeholder="Search our site"
+										/>
+										<div class="input-group-append">
+											<button
+												class="
+													form-control form-control
+													btn btn-black
+													border border-dark
+													rounded-0
+												"
+												type="submit"
+											>
+												<span class="icon">
+													<i class="fas fa-search" aria-hidden="true"></i>
+												</span>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</li>
+						<li class="list-inline-item dropdown">
+							<a
+								class="text-black nav-link d-block d-lg-none"
+								href="#"
+								id="user-options-mob"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							>
+								<div class="text-center">
+									<div>
+										<i class="fas fa-user fa-lg" aria-hidden="true"></i>
+									</div>
+									<p class="my-0">My Account</p>
+								</div>
+							</a>
+							<div
+								class="dropdown-menu border-0"
+								aria-labelledby="user-options-mob"
+							>
+								<a href="{% url 'register' %}" class="dropdown-item">Register</a>
+								<a href="{% url 'login' %}" class="dropdown-item">Login</a>
+								
+							</div>
+						</li>
+						<li class="list-inline-item">
+							<a class="text-black nav-link d-block d-lg-none" href = "{% url 'shopping' %}">
+								<div class="text-center">
+									<div>
+										<i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
+									</div>
+									<p class="my-0">$0.00</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+					<div class="collapse navbar-collapse mt-3" id="main-nav">
+						<ul class="navbar-nav w-auto mx-auto">
+							<li class="nav-item d-block d-md-none">
+								<a
+									class="logo-font font-weight-bold nav-link text-black mr-5"
+									href="/"
+									id="home-link"
+								>
+									Home
+								</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a
+									class="logo-font font-weight-bold nav-link text-black mr-5"
+									href="#"
+									id="all-products-link"
+									data-toggle="dropdown"
+									aria-haspopup="true"
+									aria-expanded="false"
+								>
+									Fitness Programs
+								</a>
+								<div
+									class="dropdown-menu border-0"
+									aria-labelledby="all-products-link"
+								>
+									<a href = "{% url 'fitness' view_by='all' %}" class="logo-font dropdown-item"
+										>By Price</a
+									>
+									<a href = "{% url 'fitness' view_by='all' %}" class="logo-font dropdown-item"
+										>By Category</a
+									>
+									<a href = "{% url 'fitness' view_by='all' %}" class="logo-font dropdown-item"
+										>Fitness Programs</a
+									>
+								</div>
+							</li>
+
+							<li class="nav-item">
+								<a
+									href = "{% url 'supplements' %}"
+									class="logo-font font-weight-bold nav-link text-black mr-5"
+									id="supplements-link"
+									aria-haspopup="true"
+									aria-expanded="false"
+								>
+									Supplements
+								</a>
+							</li>
+							<li class="nav-item">
+								<a
+									href = "{% url 'merchandise' %}"
+									class="logo-font font-weight-bold nav-link text-black mr-5"
+									id="merchandise-link"
+									aria-haspopup="true"
+									aria-expanded="false"
+								>
+									Merchandise
+								</a>
+							</li>
+							<li class="nav-item">
+								<a
+									href = "{% url 'programs' %}"
+									class="logo-font font-weight-bold nav-link text-black"
+									id="online-coaching-link"
+									aria-haspopup="true"
+									aria-expanded="false"
+								>
+									Online Coaching
+								</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<div class="container header-container">
+			<div class="row">
+				<div class="col"></div>
+			</div>
+		</div>
+		<!-- ===== HEADER SECTION END ===== -->
+
+		<!-- ===== TESTIMONIALS SECTION START ===== -->
+		<div class="container blog-heading">
+			<div class="row">
+				<div class="col-12">
+					<hr />
+					<h2 class="logo-font mb-4">Customer <span class="underlineTheme">Testimonials</span></h2>
+					<h5 class="font-weight-bold">
+						View feedback from our customers below
+					</h5>
+					<hr />
+					<img
+						class="w-100 testimonials-page-image"
+						src="https://thumbs.dreamstime.com/b/woman-fitness-medicine-ball-exercises-silhouette-one-caucasian-exercising-studio-isolated-white-background-48847537.jpg"
+						alt="Responsive image"
+					/>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="container testimonials-container"> -->
+			<!-- ***** Testimonials Start ***** -->
+		<section id="testimonials" class="testimonials">
+			<div class="container">
+				<div
+					class="testimonials-slider swiper-container"
+				>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<div class="stars">
+									<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i>
+								</div>
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+									I just wanna say thanks for everything man from start to finish you have really helped me get an understanding of how to cut properly. All my questions have been answered and I feel that I now can go on by myself and continue on in the cut for another for weeks.
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<div class="profile mt-auto">
+									<img
+										src="assets/testimonials/testimonials-1.jpg"
+										class="testimonial-img"
+										alt=""
+									/>
+									<h3>Saul Goodman</h3>
+								</div>
+							</div>
+						</div>
+						<!-- End testimonial item -->
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<div class="stars">
+									<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i>
+								</div>
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+														Looking back on my first picture I sent to you makes me realise how far I've gotten in this cut.Starting at 87kg and now at around 75kg. I'm so happy with the results. Thanks for everything man and hopefully we can talk again someday
+
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<div class="profile mt-auto">
+									<img
+										src="assets/testimonials/testimonials-2.jpg"
+										class="testimonial-img"
+										alt=""
+									/>
+									<h3>Sara Wilsson</h3>
+								</div>
+							</div>
+						</div>
+						<!-- End testimonial item -->
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<div class="stars">
+									<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i>
+								</div>
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+												Looking back on my first picture I sent to you makes me realise how far I've gotten in this cut.Starting at 87kg and now at around 75kg. I'm so happy with the results. Thanks for everything man and hopefully we can talk again someday
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<div class="profile mt-auto">
+									<img
+										src="assets/testimonials/testimonials-3.jpg"
+										class="testimonial-img"
+										alt=""
+									/>
+									<h3>Jena Karlis</h3>
+								</div>
+							</div>
+						</div>
+						<!-- End testimonial item -->
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<div class="stars">
+									<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i>
+								</div>
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+										It's the end of my 6 weeks and I have just stood on the scales and have dropped to 11st 10.5lbs. I have really enjoyed the training and being able to track and eat what foods I want so I'm not craving and then end up having a big binge
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<div class="profile mt-auto">
+									<img
+										src="assets/testimonials/testimonials-4.jpg"
+										class="testimonial-img"
+										alt=""
+									/>
+									<h3>Matt Brandon</h3>
+								</div>
+							</div>
+						</div>
+						<!-- End testimonial item -->
+
+						<div class="swiper-slide">
+							<div class="testimonial-item">
+								<div class="stars">
+									<i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+									><i class="bi bi-star-fill"></i>
+								</div>
+								<p>
+									<i class="bx bxs-quote-alt-left quote-icon-left"></i>
+													It's the end of my 6 weeks and I have just stood on the scales and have dropped to 11st 10.5lbs. I have really enjoyed the training and being able to track and eat what foods I want so I'm not craving and then end up having a big binge
+									<i class="bx bxs-quote-alt-right quote-icon-right"></i>
+								</p>
+								<div class="profile mt-auto">
+									<img
+										src="assets/testimonials/testimonials-5.jpg"
+										class="testimonial-img"
+										alt=""
+									/>
+									<h3>John Larson</h3>
+								</div>
+							</div>
+						</div>
+						<!-- End testimonial item -->
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+		</section>
+		<!-- ***** Testimonials End ***** -->
+
+
+
+			<!-- <div class="row">
+				<div class="col-12">
+					<div class="card card-style-testimonial border-secondary mb-4">
+						<div class="card-body text-center">
+							<p class="font-weight-bold text-uppercase logo-font">
+								<i class="fas fa-dumbbell mr-2"></i></i>Wonderful
+								service
+							</p>
+							<p>
+									I just wanna say thanks for everything man from start to finish you have really helped me get an understanding of how to cut properly. All my questions have been answered and I feel that I now can go on by myself and continue on in the cut for another for weeks.
+							</p>
+							<p class="font-italic">By Stephen</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12">
+					<div class="card card-style-testimonial border-secondary mb-4">
+						<div class="card-body text-center">
+							<p class="font-weight-bold text-uppercase logo-font">
+								<i class="fas fa-dumbbell mr-2"></i>Brilliant
+								Training
+							</p>
+							<p>
+								I've got another 3 weeks till my holiday so I'm going to stick to the macros for that time then have a rest but minimise the damage done on holiday then cut down again for summer. I can't thank you enough for the help and what you have taught me it is definitely a sustainable way of living and I'm keen to see what changes will happen in even a years time. Once again thanks.
+							</p>
+							<p class="font-italic">By Macc</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12">
+					<div class="card card-style-testimonial border-secondary mb-4">
+						<div class="card-body text-center">
+							<p class="font-weight-bold text-uppercase logo-font">
+								<i class="fas fa-dumbbell mr-2"></i>Speedy
+								weight loose
+							</p>
+							<p>
+								Looking back on my first picture I sent to you makes me realise how far I've gotten in this cut.Starting at 87kg and now at around 75kg. I'm so happy with the results. Thanks for everything man and hopefully we can talk again someday
+							</p>
+							<p class="font-italic">By Nepthew</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12">
+					<div class="card card-style-testimonial border-secondary mb-4">
+						<div class="card-body text-center">
+							<p class="font-weight-bold text-uppercase logo-font">
+								<i class="fas fa-dumbbell mr-2"></i>Amazing
+								Training
+							</p>
+							<p>
+								It's the end of my 6 weeks and I have just stood on the scales and have dropped to 11st 10.5lbs. I have really enjoyed the training and being able to track and eat what foods I want so I'm not craving and then end up having a big binge
+							</p>
+							<p class="font-italic">By Stevenson</p>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<div class="row testimonial-page-btns">
+				<div class="col text-right">
+					<a href="/" class="btn btn-outline-black rounded-0 btn-sm">
+						<span class="icon">
+							<i class="fas fa-chevron-left" aria-hidden="true"></i>
+						</span>
+						<span class="text-uppercase">Home</span>
+					</a>
+				</div>
+				<div class="col text-left">
+					<a href = "{% url 'fitness' view_by='all' %}" class="btn btn-outline-black rounded-0 btn-sm">
+						<span class="text-uppercase">View Programs</span>
+						<span class="icon">
+							<i class="fas fa-chevron-right" aria-hidden="true"></i>
+						</span>
+					</a>
+				</div>
+			</div>
+		<!-- </div> -->
+		<!-- ===== TESTIMONIALS SECTION END ===== -->
+<br />
+
+    <!-- ===== FOOTER SECTION START ===== -->
+	<footer class="container-fluid" id="footer">
+		<div class="row text-center text-black footer-icons">
+			<div class="col-12 mt-4">
+				<h3 class="font-weight-bold logo-font">LUKE DUFFY <span class="underlineTheme"> FITNESS</span></h3>
+			</div>
+			<div class="col mt-1">
+				<a
+					href="https://www.facebook.com/"
+					target="_blank"
+					class="footer-icon"
+				>
+					<i class="fab fa-facebook-f social-icon" aria-hidden="true"></i>
+				</a>
+				<a href="https://www.instagram.com/" target="_blank" class="footer-icon">
+					<i class="fab fa-instagram social-icon" aria-hidden="true"></i>
+				</a>
+				<a href="https://www.medium.com/" class="footer-icon">
+					<i class="fab fa-medium social-icon" aria-hidden="true"></i>
+				</a>
+				<a href="https://twitter.com/" class="footer-icon">
+					<i class="fab fa-twitter social-icon" aria-hidden="true"></i>
+				</a>
+			</div>
+		</div>
+		<div class="row text-center text-black footer-links mt-3">
+		</div>
+		<!-- <div class="row text-center text-black footer-links">
+			<div class="col">
+				<a
+					href = "{% url 'blogs' %}"
+					class="text-uppercase font-weight-bold footer-links"
+					>View Blog</a
+				>
+			</div>
+		</div> -->
+		<div class="row mt-2 text-center text-black copyright-text">
+			<div class="col">
+				<p>© Luke Duffy Fitness 2021</p>
+			</div>
+		</div>
+	</footer>
+		</div>
+		<!-- ===== FOOTER SECTION END ===== -->
+
+		<!-- jQuery -->
+		<script src="assets/js/jquery-2.1.0.min.js"></script>
+
+		<!-- Bootstrap -->
+		<script src="assets/js/popper.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+
+		<!-- Plugins -->
+		<script src="assets/js/scrollreveal.min.js"></script>
+		<script src="assets/js/imgfix.min.js"></script>
+		<script src="assets/js/jquery.counterup.min.js"></script>
+		<script src="assets/js/swiper/swiper-bundle.min.js"></script>
+
+		<!-- Global Init -->
+		<script src="assets/js/custom.js"></script>
+	</body>
+</html>
