@@ -33,7 +33,7 @@ In a world where health, fitness and aesthetics are playing an increasingly impo
 
 ## Color Scheme
 
-For my website I used the 'Canva' Pallete generator service to ensure a minimailistic, yet eye-catching and bright color scheme for my website.
+For my website I used the 'Canva' Pallete generator service to ensure a understated, yet clean color scheme for my website.
 
 ![Imgur](https://imgur.com/36f0GuB.jpg)
 
@@ -68,8 +68,8 @@ For my website I used the 'Canva' Pallete generator service to ensure a minimail
 
 ## Features Testing 
 
-### Accessing Recipes
-- Click on 'All Recipes' button on Navbar
+### Purchasing Supplement
+- Click on 'Supplements' button on Navbar
 - Does it bring you to correct page?
 - Hover over image of recipe to display each recipe title
 - click on recipe image
@@ -126,7 +126,13 @@ a master branch by one author at the following link: (https://github.com/lukeduf
 - This project has been deployed on Heroku under the following URL: (https://luke-duffy-fitness.herokuapp.com/) 
 
 ## Media 
-- This project has used photos and images from https://www.google.com/imghp?hl=en. 
+- This project has used photos, images and inspiration from the following websites: 
+
+- [Pexels](https://www.pexels.com)
+- [Unsplash](https://www.unsplash.com)
+- [Google Images](https://www.google.com/imghp?hl=en)
+- [Rob Lipsett](https://www.roblipsett.com/)
+- [Mike Thurston](https://thrstofficial.com/)
 
 ## Credits and Acknowledgements 
 - I would like to say thank you to my mentor Oluwaseun Owonikoko, who has been of immense help and kindness during my coding journey so far.
