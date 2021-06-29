@@ -38,23 +38,9 @@ For my website I used the 'Canva' Pallete generator service to ensure a minimail
 ![Imgur](https://imgur.com/36f0GuB.jpg)
 
 
-## Wireframes
-### Home Page
-![Home Page](https://imgur.com/1zFfsZR.png)
-### All Recipes Page
-![All Recipes page](https://imgur.com/8gKrdRN.png)
-### Register Page
-![Register Page](https://imgur.com/MRRNYR9.png)
-### Upload Recipe Page
-![Upload Recipe Page](https://imgur.com/0wKGM3H.png)
-### View Recipe Page
-![View Recipe Page](https://imgur.com/8ZDxI8Q.png)
-
-
 ## Technoliges Used
 
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
-
 
 <img src="https://img.shields.io/badge/CSS-239120?style=for-the-badge&logo=css3&logoColor=white" />
 
@@ -63,8 +49,13 @@ For my website I used the 'Canva' Pallete generator service to ensure a minimail
 <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" />
 
 <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white" />
+<img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
+<img src="https://img.shields.io/badge/DJANGO-REST-ff1709?style=for-the-badge&logo=django&logoColor=white&color=ff1709&labelColor=gray" />
+<img src="https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white
+" />
 
 <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
+
 
 
 
@@ -132,11 +123,11 @@ For my website I used the 'Canva' Pallete generator service to ensure a minimail
 ## Deployment
 
 - This project has been stored on Github and is built from 
-a master branch by one author at the following link: https://github.com/lukeduffy84/cook_club_real 
-- This project has been deployed on Heroku under the following URL: (https://cook-club.herokuapp.com/) 
+a master branch by one author at the following link: (https://github.com/lukeduffy84/gym_subscription_ms4_2)
+- This project has been deployed on Heroku under the following URL: (https://luke-duffy-fitness.herokuapp.com/) 
 
 ## Media 
-- This project has used photos and recipe details from the BBC Food website, which can be found at the following URL: https://www.bbc.co.uk/food 
+- This project has used photos and images from https://www.google.com/imghp?hl=en. 
 
 ## Credits and Acknowledgements 
 - I would like to say thank you to my mentor Oluwaseun Owonikoko, who has been of immense help and kindness during my coding journey so far.
