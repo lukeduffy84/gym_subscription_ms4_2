@@ -95,13 +95,14 @@
 							</a>
 							<div
 								class="dropdown-menu border-0"
-								aria-labelledby="user-options"
-							>
+								aria-labelledby="user-options">
+								  {% if islogin %}
+								<a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Products</a>
+								<a href="{% url 'logout' %}" class="dropdown-item logo-font">Logout</a>
+								{% else %}
 								<a href="{% url 'register' %}" class="dropdown-item logo-font">Register</a>
 								<a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
-								{% if islogin %}
-								<a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Product</a>
-							{% endif %}
+								{% endif %}
 							</div>
 						</li>
 						<li class="list-inline-item">
@@ -198,8 +199,13 @@
 								class="dropdown-menu border-0"
 								aria-labelledby="user-options-mob"
 							>
-								<a href="{% url 'register' %}" class="dropdown-item">Register</a>
-								<a href="login.html" class="dropdown-item">Login</a>
+							  {% if islogin %}
+                            <a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Products</a>
+                            <a href="{% url 'logout' %}" class="dropdown-item logo-font">Logout</a>
+                            {% else %}
+                            <a href="{% url 'register' %}" class="dropdown-item logo-font">Register</a>
+                            <a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
+                            {% endif %}
 							</div>
 						</li>
 						<li class="list-inline-item">

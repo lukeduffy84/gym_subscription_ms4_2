@@ -67,11 +67,13 @@
 								</div>
 							</a>
                 <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                    <a href="{% url 'register' %}" class="dropdown-item logo-font">Register</a>
-                    <a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
-					{% if islogin %}
-					<a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Product</a>
-				{% endif %}
+                    {% if islogin %}
+                            <a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Products</a>
+                            <a href="{% url 'logout' %}" class="dropdown-item logo-font">Logout</a>
+                            {% else %}
+                            <a href="{% url 'register' %}" class="dropdown-item logo-font">Register</a>
+                            <a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
+                            {% endif %}
 					
                 </div>
                 </li>
@@ -133,8 +135,13 @@
                             </div>
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="user-options-mob">
-                            <a href="{% url 'register' %}" class="dropdown-item">Register</a>
-                            <a href="{% url 'login' %}" class="dropdown-item">Login</a>
+                            {% if islogin %}
+                            <a href="{% url 'myproduct' %}" class="dropdown-item logo-font">My Products</a>
+                            <a href="{% url 'logout' %}" class="dropdown-item logo-font">Logout</a>
+                            {% else %}
+                            <a href="{% url 'register' %}" class="dropdown-item logo-font">Register</a>
+                            <a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
+                            {% endif %}
                         </div>
                     </li>
                     <li class="list-inline-item">
@@ -259,13 +266,10 @@
 					/>
 				</div>
 				<div class="col-md-12 col-lg-6 px-md-0 text-center testimonial-section-text">
-					<!-- <p>
-	Your diet doesn't have to be boring! Our meal plans are designed so that you love the food you eat whilst still hitting your goals.
-					</p>
-					<br> <br> <br> <br> -->
+					
 					<h2 class="logo-font testimonial-section-text">SUPPLE<span class="underlineTheme">MENTS</span></h2>
 					<p class="px-1 px-md-5">
-						Your diet doesn't have to be boring! Our meal plans are designed so that you love the food you eat whilst still hitting your goals.	
+						Your diet doesn't have to be boring! Our supplements are designed for high performance training that will help you towards your fitness goals.	
 					</p>
 					<a
 						href = "{% url 'supplements' %}"

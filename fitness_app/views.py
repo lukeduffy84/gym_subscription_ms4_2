@@ -4,6 +4,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib import messages
 from django.http import HttpResponseRedirect,JsonResponse
 from .authorize import login_authorize, create_payment_charge,generate_card_token
+
 # Create your views here.
 
 def index(request):
@@ -300,3 +301,5 @@ def checkout(request):
 
 
 
+def log_out(request):
+    logout(request)
