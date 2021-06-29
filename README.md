@@ -91,30 +91,36 @@ For my website I used the 'Canva' Pallete generator service to ensure a understa
 - Does it allow login with the newly created account details?
 
 ### Logging In 
-- Click on 'Log In / Register' button on Navbar
-- Click on 'Already a member? Login' button at bottom of Registration page
+- Click on 'My Account' button on Navbar
+- Click on 'Login' within dropdown menu
 - Does it bring you to login input form?
 - After inputting profile username and password, does it render correct corresponding account?
-- Does the navbar change to include the Cook Club 'add recipes', 'my recipes' and 'log out' buttons?
+- Does the navbar change to include the 'My Products' and 'log out' buttons?
 
 ### Adding item to Basket
-- Click on 'Add Recipes' button on Navbar
-- Does website render correct form?
-- On clicking 'submit' button, does website bring user back to home page to view newly added recipe?
-- Does it render image correctly when recipe is added?
-- When clicking on image, does it retrieve correct inputted recipe details?
+- Click on the 'Fitness Programs' button within the Navbar.
+- Does website render correct page?
+- Click on 'Leak Bulking Program'
+- Does correct product page load?
+- When clicking on 'Add to Bag' button, does shopping bad correctly update?
 
 ### Purchasing items in Basket  
-
-
+- Click on basket icon in top right hand corner of Navbar. 
+- Does website render basket page?
+- Can users clear items from basket?
+- Can users change the quantity of items they have in their bag by clickon on the + and - buttons?
+- Click on 'Secure Checkout' button.
+- Does website render payments input webpage?
+- Input correct details and click purchase.
+- Is 'Thank You' webpage correctly 
 ### Searching for an Item 
-- Input desired recipe keyword into search box on Cook Club webpage
-- Does correspinding recipe option render correctly?
-- If keyword is uncorresponding to recipe in database, does no recipe show up in results?
+- Input desired recipe keyword into search box within the Navbar.
+- Does correspinding product option render correctly?
+- If keyword is uncorresponding to recipe in database, does no product item show up in results?
 
 ### Logging Out 
 - Click on 'Log Out' button on Navbar as an already logged in user
-- Does website return user to login webpage?
+- Does website return user to home webpage?
 - Does Navbar change to 'Non-logged in' variant with corresponding buttons?
 
 ## Deployment
