@@ -14,19 +14,23 @@ In a world where health, fitness and aesthetics are playing an increasingly impo
 
 ### Non-registered Users
 
-- Allows guest user to search recipe database using search bar available under the navbar.
-- Allows guest user to visit 'All Recipes' section and examine all recipes uploaded so far to the database by clicking on the  'all recipes' button on the navbar. sbsbsbbsbsbhubu
-- Allows guest user to hover over an image of a recipe to see display of recipe title.
-- Allows guest user to click on the image of a recipe and subsequently be brought to the full recipe page, which will display more information about the recipe including the ingredients and instructins for that particular recipe.
-- Allows guest user to see the 'about us' section, which gives a quick general history and overview of 'Cook Club' while providing a convient 'Sign Up' button that directs guest user to registration page.
-- Allows guest user to click on the 'login/register' button in the navbar and be brought to the registration page where they can sign up for a Cook CLub account. 
+- Allows guest user to search database for fitness item using search bar available within navbar.
+- Allows guest user to clearly navigate to each of the clearly marked four sections of the website, including 'Fitness Programs', 'Supplements', 'Merchandise' and 'Online Coaching'.
+- Allows guest user to scroll down home page and access 
+the 'Testimonials' page, which will show the customer feedback from each the websites clients.
+- Allows guest user to add a product to the shopping bag.
+- Allows guest user to click on the 'My Account' button and the 'register' button to sign up to Luke Duffy Fitness, where the guest user will be brought to a seperate web page to input their account details. 
+- Allows guest user to click on the shopping bag icon to view products already added to bag and 'Grand Total'.
+- Allows guest user to to click on Secure Checkout to purchase the items in their bag, as well as changing the quantities of the the product they wish to purchase.
+- Allows guest user to subsequently input debit card details and complete purchase of products.
+
 
 ### Logged In Users
-- Allows click on the 'Log In / Register" button where they will be subsequently be brought to the registration page, where they will be given the option to 'login' if they are already a member of the site.
-- Allows logged in users to add their own recipes by clicking on the 'Add recipes' button within the navbar. On clicking the button, they will be taken to a page where they will be presented with five seperate input fields that allows users to upload a Recipe Name, Image URL, Required Ingredients, Cooking Instructions and finally select a radio button option for which meal the recipe in question pertains to.
-- Allows logged in users to check which recipes they have uploaded to Cook Club by clicking on the 'My Recipes' button within the navbar. On clicking the button, they will be taken to a seperate page where they will be presented photos of each of the recipes they've uploaded and the option to visit each recipe page individually. 
-- Allows logged in users to edit and delete the recipes they've uploaded through the 'edit' and 'delete' buttons at the bottom of their own recipes. 
-- Allows logged in users to sign out of their profile on Cook Club by clicking on the 'Log Out' button within the navbar.
+
+- Allows logged in users to click on the login button where they will be subsequently be brought to the login site of the page and asked to input their details. 
+- Allows logged in user to click on the shopping bag icon to view products already added to bag and 'Grand Total'.
+- Allows logged 'Super Users' (this will be default for deployed version for all users logged in as to show this feature to examiners) to click on 'My Account' button and click on the 'My Product' button where super users can add, edit and delte the products they want to sell on the website. 
+- Allows logged in user to sign out of their profile on Luke Duffy Fitness by clicking on the 'Log Out' button within the 'My Account' section on the Navbar.
 
 
 # Design 
@@ -68,17 +72,21 @@ For my website I used the 'Canva' Pallete generator service to ensure a understa
 
 ## Features Testing 
 
-### Purchasing Supplement
+### Navigating the Website
 - Click on 'Supplements' button on Navbar
 - Does it bring you to correct page?
-- Hover over image of recipe to display each recipe title
-- click on recipe image
-- Does it bring you to correct page for corresponding recipe?
+- Click on 'Mechandise' button on Navbar
+- Does it bring you to correct page?
+- Click on 'Online Coaching' button on Navbar
+- Does it bring you to correct page?
+- Click on 'Fitness Programs' button on Navbar
+- Does it bring you to correct page?
+
 
 ### Registering 
-- Click on 'Log In / Register' button on Navbar
-- Does it render the registration inputs?
-- Submit details
+- Click on 'My Account' button on Navbar
+- Does the dropdown menu render?
+- Click on 'Register' button.
 - Does it bring you login page to thus login in with new account details?
 - Does it allow login with the newly created account details?
 
@@ -89,27 +97,17 @@ For my website I used the 'Canva' Pallete generator service to ensure a understa
 - After inputting profile username and password, does it render correct corresponding account?
 - Does the navbar change to include the Cook Club 'add recipes', 'my recipes' and 'log out' buttons?
 
-### Adding a Recipe
+### Adding item to Basket
 - Click on 'Add Recipes' button on Navbar
 - Does website render correct form?
 - On clicking 'submit' button, does website bring user back to home page to view newly added recipe?
 - Does it render image correctly when recipe is added?
 - When clicking on image, does it retrieve correct inputted recipe details?
 
-### Editing a Recipe 
-- Click on 'My Recipes' button on Navbar or click on an image of recipe user has already uploaded from their own account
-- Does 'Edit' button appear at the bottom of the page?
-- After clicking button, is the 'Edit Recipe' page rendered correctly with already inputted details rendering also?
-- After editing text/images, are requested changes correctly made to recipe data after clicking the 'submit' button?
-
-### Deleting a Recipe 
-- Click on 'My Recipes' button on Navbar or click on an image of recipe user has already uploaded from their own account
-- Does 'Delete' button appear at the bottom of the page?
-- After clicking button, is user returned correctly the 'My Recipes' page?
-- Has seleted recipe been correctly removed from 'all recipes' and 'my recipes' database?
+### Purchasing items in Basket  
 
 
-### Searching for a Recipe 
+### Searching for an Item 
 - Input desired recipe keyword into search box on Cook Club webpage
 - Does correspinding recipe option render correctly?
 - If keyword is uncorresponding to recipe in database, does no recipe show up in results?
