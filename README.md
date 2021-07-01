@@ -121,7 +121,7 @@ For my website I used the 'Canva' Pallete generator service to ensure a understa
 ### Logging Out 
 - Click on 'Log Out' button on Navbar as an already logged in user
 - Does website return user to home webpage?
-- Does Navbar change to 'Non-logged in' variant with corresponding buttons?
+- Does Navbar change to 'Non-logged in' variant with corresponding buttons? 
 
 ## Deployment
 
