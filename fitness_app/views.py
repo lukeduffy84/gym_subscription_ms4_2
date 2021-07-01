@@ -9,13 +9,14 @@ from .authorize import login_authorize, create_payment_charge,generate_card_toke
 
 def index(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     print("login_data:",login_data, islogin)
     return render(request,'index.html',{'islogin':islogin,'cart_price':cart_price})
 
 
 def customer_login(request):
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -39,11 +40,11 @@ def customer_login(request):
             messages.info(request, error)
             return HttpResponseRedirect('/login')
 
-    return render(request,'login.html')
+    return render(request,'login.html',{'cart_price':cart_price})
 
 
 def customer_signup(request):
-
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     if request.method == 'POST':
         email = request.POST.get('email')
         username = request.POST.get('username')
@@ -75,13 +76,13 @@ def customer_signup(request):
         Customer.objects.create(**data)
         return HttpResponseRedirect('/login')
 
-    return render(request,'register.html')
+    return render(request,'register.html',{'cart_price':cart_price})
 
 
 
 def add_product(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     csid = login_data['_id']
     if request.method == 'POST':
@@ -105,7 +106,7 @@ def add_product(request):
 def edit_product(request, pid):
 
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
 
     if not islogin:
@@ -139,7 +140,7 @@ def edit_product(request, pid):
 
 def delete_product(request,pid):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     if not islogin:
         return HttpResponseRedirect('/login')
@@ -151,7 +152,7 @@ def delete_product(request,pid):
 
 def my_products(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     csid = login_data['_id']
     product_data = Product.objects.filter(customer_id=csid).all()
@@ -161,7 +162,7 @@ def my_products(request):
 
 def view_my_product(request, pid):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     product_data = Product.objects.get(id=int(pid))
 
@@ -170,7 +171,7 @@ def view_my_product(request, pid):
 
 def view_single_product(request, pid):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     product_data = Product.objects.get(id=int(pid))
 
@@ -179,7 +180,7 @@ def view_single_product(request, pid):
 
 def all_program(request,view_by):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     view_by = 'created_at' if view_by == 'all' else view_by
     product_data = Product.objects.all().order_by(view_by)
@@ -203,7 +204,7 @@ def all_program(request,view_by):
 
 def merchandise(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     product_data = Product.objects.filter(category='Merchandise').all()
     count = product_data.count()
@@ -212,7 +213,7 @@ def merchandise(request):
 
 def supplements(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     product_data = Product.objects.filter(category='Supplements').all()
     count = product_data.count()
@@ -220,7 +221,7 @@ def supplements(request):
 
 def online_programs(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     product_data = Product.objects.filter(category='Online Coaching').all()
     count = product_data.count()
@@ -229,7 +230,7 @@ def online_programs(request):
 
 def testimonials(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     product_data = Product.objects.all()
     return render(request,'testimonials.html',{'data':product_data,'islogin':islogin})
@@ -237,17 +238,23 @@ def testimonials(request):
 
 def blogs(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     return render(request,'blog.html',{'islogin':islogin})
 
 
 def shopping_bag(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     cart_data = request.session['cart'] if 'cart' in request.session else {}
     has_item = True if len(cart_data)>0 else False
+
+    return render(request,'bag.html',{'data':cart_data,'islogin':islogin,'cart_price':cart_price,'has_item':has_item})
+
+
+def add_shopping(request):
+
     if request.method == 'POST':
         quantity = request.POST.get('quantity')
         pid = request.POST.get('product_id')
@@ -261,15 +268,36 @@ def shopping_bag(request):
         print("***************************")
         request.session['cart'] = cart_data
         request.session['cart_price'] = cart_data['subtotal']
-        has_item = True if len(cart_data)>0 else False
-        return render(request,'bag.html',{'data':cart_data,'islogin':islogin,'cart_price':cart_price,'has_item':has_item})
+        return HttpResponseRedirect('/shopping')
+    
 
-    return render(request,'bag.html',{'data':cart_data,'islogin':islogin,'cart_price':cart_price,'has_item':has_item})
+def delete_from_shopping_bag(request, pid):
+    """Delete the item from the shopping bag"""
+    del request.session['cart']
+    del request.session['cart_price']
 
+    return HttpResponseRedirect('/shopping')
+
+
+def update_bag(request):
+    if request.method == 'POST':
+        quantity = request.POST.get('quantity')
+        pid = request.POST.get('pid')
+        price = request.POST.get('price')
+        product_data = Product.objects.get(id=int(pid))
+        subtotal = round(float(price) * int(quantity),2)
+        total = subtotal+2.50
+        cart_data =dict(name=product_data.name,image_link=product_data.image_link,quantity=quantity,pid=pid,price=price,subtotal=subtotal,sku=product_data.sku,total=total)
+        print("***************************")
+        print(cart_data)
+        print("***************************")
+        request.session['cart'] = cart_data
+        request.session['cart_price'] = cart_data['subtotal']
+        return HttpResponseRedirect('/shopping')
 
 def checkout(request):
     login_data = login_authorize(request)
-    cart_price = login_data['cart_price']
+    cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
     islogin = True if login_data["success"] else False
     cart_data = request.session['cart']
     if request.method == 'POST':
@@ -279,14 +307,14 @@ def checkout(request):
         street_address1 = request.POST.get('street_address1')
         street_address2 = request.POST.get('street_address2')
         town_or_city = request.POST.get('town_or_city')
-        county = request.POST.get('county')
+        county = request.POST.get('country')
         postcode = request.POST.get('postcode')
         card_number = request.POST.get('cardnumber')
         card_expyear = request.POST.get('expyear')
         card_expmonth = request.POST.get('expmonth')
         card_cvv = request.POST.get('card_cvv')
 
-        print(card_number,card_expyear,card_expmonth,card_cvv)
+        print(card_number,card_expyear,card_expmonth,card_cvv,county)
 
         tokenid = generate_card_token(card_number,card_expmonth,card_expyear,card_cvv)
 
