@@ -213,7 +213,7 @@ name="searchstring"							type="text"				placeholder="Search Programs"
 									<div>
 										<i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
 									</div>
-									<p class="my-0">$0.00</p>
+									<p class="my-0">${{cart_price}}</p>
 								</div>
 							</a>
 						</li>
@@ -333,7 +333,7 @@ name="searchstring"							type="text"				placeholder="Search Programs"
 							<p class="mt-3">
 								{{data.description}}
 							</p>
-							<form class="form" action="{% url 'shopping' %}" enctype="multipart/form-data" method="POST">
+							<form class="form" action="{% url 'addbag' %}" enctype="multipart/form-data" method="POST">
 								<input
 									type="hidden" name="product_id" value="{{pid}}"
 								/>
@@ -346,11 +346,12 @@ name="searchstring"							type="text"				placeholder="Search Programs"
 										<div class="form-group w-50">
 											<div class="input-group">
 												<div class="input-group-prepend">
-													<button type="submit"
+													<button type="button"
 														class="decrement-qty btn btn-black rounded-0"
 														data-item_id="5"
-														id="decrement-qty_5"
-														disabled=""
+														id="sub"
+														onclick="decremaentValue()"
+														
 													>
 														<span class="icon">
 															<i class="fas fa-minus" aria-hidden="true"></i>
@@ -365,14 +366,16 @@ name="searchstring"							type="text"				placeholder="Search Programs"
 													min="1"
 													max="99"
 													data-item_id="5"
-													id="id_qty_5"
+													id="number"
 												/>
 												<div class="input-group-append">
 													<button
+														type="button"
 														class="increment-qty btn btn-black rounded-0"
 														data-item_id="5"
 														id="increment-qty_5"
-														disabled=""
+														id="add"
+														onclick="incrementValue()"
 													>
 														<span class="icon">
 															<i class="fas fa-plus" aria-hidden="true"></i>
@@ -428,9 +431,9 @@ name="searchstring"							type="text"				placeholder="Search Programs"
 				<a href="https://www.instagram.com/" target="_blank" class="footer-icon">
 					<i class="fab fa-instagram social-icon" aria-hidden="true"></i>
 				</a>
-				<a href="https://www.medium.com/" class="footer-icon">
-					<i class="fab fa-medium social-icon" aria-hidden="true"></i>
-				</a>
+				<a href="https://www.youtube.com/" class="footer-icon">
+                    <i class="fab fa-youtube social-icon" aria-hidden="true"></i>
+                </a>
 				<a href="https://twitter.com/" class="footer-icon">
 					<i class="fab fa-twitter social-icon" aria-hidden="true"></i>
 				</a>
@@ -456,4 +459,27 @@ name="searchstring"							type="text"				placeholder="Search Programs"
 		</div>
 		<!-- ===== FOOTER SECTION END ===== -->
 	</body>
+	<script type="text/javascript">
+		function incrementValue()
+		 {
+			 var value = parseInt(document.getElementById('number').value, 10);
+			 value = isNaN(value) ? 0 : value;
+			 value++;
+			 document.getElementById('number').value = value;
+		 }
+ 
+		 function decremaentValue()
+		 {
+			 var value = parseInt(document.getElementById('number').value, 10);
+			 value = isNaN(value) ? 0 : value;
+			 value--;
+			 if (value < 1) {
+				 new_val = 1;
+			 } else {
+				 new_val = value;
+			 }
+ 
+			 document.getElementById('number').value = new_val;
+		 }
+	 </script>
 </html>
