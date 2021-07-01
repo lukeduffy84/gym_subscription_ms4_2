@@ -214,7 +214,7 @@
 									<div>
 										<i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
 									</div>
-									<p class="my-0">$0.00</p>
+									<p class="my-0">${{cart_price}}</p>
 								</div>
 							</a>
 						</li>
@@ -342,28 +342,35 @@
                      <p class="my-0">${{data.price}}</p>
                   </td>
                   <td class="py-3 w-25">
-                     <form class="form update-form" method="POST" action="/bag/adjust/1/">
-    <input type="hidden" name="csrfmiddlewaretoken" value="gmov55FnHScaoxVov51oXMqElwjhuLCqy57VdtjKl6g5m41RF0SWcyoFKfdZNaJL">
-    <div class="form-group">
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <button class="decrement-qty btn btn-sm btn-black rounded-0" data-item_id="1" id="decrement-qty_1" disabled="">
-                    <span>
-                        <i class="fas fa-minus fa-sm" aria-hidden="true"></i>
-                    </span>
-                </button>
-            </div>
-            <input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{data.quantity}}" min="1" max="99" data-item_id="1" id="id_qty_1">
-            <div class="input-group-append">
-                <button class="increment-qty btn btn-sm btn-black rounded-0" data-item_id="1" id="increment-qty_1" disabled="">
-                    <span>
-                        <i class="fas fa-plus fa-sm" aria-hidden="true"></i>
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-</form>
+                     <form action="{% url 'updatebag' %}" method="POST" enctype="multipart/form-data">
+						<input type="hidden" name="pid" value="{{data.pid}}">
+                        <input type="hidden" name="price" value="{{data.price}}">
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<button type="button" class="decrement-qty btn btn-sm btn-black rounded-0" id="sub" onclick="decremaentValue()" data-item_id="1" id="decrement-qty_1">
+											<span>
+												<i class="fas fa-minus fa-sm" aria-hidden="true"></i>
+											</span>
+										</button>
+									</div>
+									<input class="form-control form-control-sm qty_input" type="number" name="quantity" value="{{data.quantity}}" min="1" max="99" data-item_id="1" id="number">
+									<div class="input-group-append">
+										<button type="button" class="increment-qty btn btn-sm btn-black rounded-0" data-item_id="1" id="add" onclick="incrementValue()">
+											<span>
+												<i class="fas fa-plus fa-sm" aria-hidden="true"></i>
+											</span>
+										</button>
+									</div>
+									<div class="input-group-append">
+											<span>
+												<button type="submit" class="btn btn-info btn-sm"><i class="fas fa-refresh"></i></button>
+                                        	<a class="btn btn-danger btn-sm" href="{% url 'remove_cart' pid=data.pid %}"><i class="fas fa-trash"></i></a>
+											</span>
+									</div>
+								</div>
+							</div>
+						</form>
 <!-- <a class="update-link text-info"><small>Update</small></a>
 <a class="remove-item text-danger float-right" id="remove_1"><small>Remove</small></a> -->
                   </td>
@@ -426,9 +433,9 @@
 				<a href="https://www.instagram.com/" target="_blank" class="footer-icon">
 					<i class="fab fa-instagram social-icon" aria-hidden="true"></i>
 				</a>
-				<a href="https://www.medium.com/" class="footer-icon">
-					<i class="fab fa-medium social-icon" aria-hidden="true"></i>
-				</a>
+				<a href="https://www.youtube.com/" class="footer-icon">
+                    <i class="fab fa-youtube social-icon" aria-hidden="true"></i>
+                </a>
 				<a href="https://twitter.com/" class="footer-icon">
 					<i class="fab fa-twitter social-icon" aria-hidden="true"></i>
 				</a>
@@ -454,4 +461,27 @@
 		</div>
 		<!-- ===== FOOTER SECTION END ===== -->
 	</body>
+	<script type="text/javascript">
+		function incrementValue()
+		 {
+			 var value = parseInt(document.getElementById('number').value, 10);
+			 value = isNaN(value) ? 0 : value;
+			 value++;
+			 document.getElementById('number').value = value;
+		 }
+ 
+		 function decremaentValue()
+		 {
+			 var value = parseInt(document.getElementById('number').value, 10);
+			 value = isNaN(value) ? 0 : value;
+			 value--;
+			 if (value < 1) {
+				 new_val = 1;
+			 } else {
+				 new_val = value;
+			 }
+ 
+			 document.getElementById('number').value = new_val;
+		 }
+	 </script>
 </html>
