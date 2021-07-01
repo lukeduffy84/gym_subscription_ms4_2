@@ -385,9 +385,10 @@
                            <input type="text" name="town_or_city" maxlength="40" placeholder="Town or City *" class="stripe-style-input textinput textInput form-control" required="" id="id_town_or_city">
                         </div>
                      </div>
-                     <div id="div_id_county" class="form-group">
+                     <div id="div_id_country" class="form-group">
                         <div class="">
-                           <input type="text" name="county" maxlength="80" placeholder="County" class="stripe-style-input textinput textInput form-control" id="id_county">
+                           <select name="country" class="selectpicker countrypicker form-control" required="" id="id_country">
+                           </select>
                         </div>
                      </div>
                      <div id="div_id_postcode" class="form-group">
@@ -395,14 +396,7 @@
                            <input type="text" name="postcode" maxlength="20" placeholder="Postal Code" class="stripe-style-input textinput textInput form-control" id="id_postcode">
                         </div>
                      </div>
-                     <div id="div_id_country" class="form-group">
-                        <div class="">
-                           <select name="country" class="stripe-style-input lazyselect form-control" required="" id="id_country">
-                              <option value="" selected="">Country *</option>
-                              <option value="AF">Afghanistan</option>
-                           </select>
-                        </div>
-                     </div>
+                     
                      <div class="form-check form-check-inline float-right mr-0">
                         <label class="form-check-label" for="id-save-info">
                         <a class="text-info" href="{% url 'register' %}">Create an account</a> or 
@@ -496,5 +490,6 @@
       </footer>
       </div>
       <!-- ===== FOOTER SECTION END ===== -->
+      <script src="{% static 'assets/js/bootstrap-select-country.min.js' %}"></script>
    </body>
 </html>
