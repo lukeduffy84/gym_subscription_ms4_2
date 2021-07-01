@@ -135,8 +135,9 @@ a master branch by one author at the following link: (https://github.com/lukeduf
 - [Pexels](https://www.pexels.com)
 - [Unsplash](https://www.unsplash.com)
 - [Google Images](https://www.google.com/imghp?hl=en)
-- [Rob Lipsett](https://www.roblipsett.com/)
-- [Mike Thurston](https://thrstofficial.com/)
+- [Rob Lipsett Fitness](https://www.roblipsett.com/)
+- [Mike Thurston Fitness](https://thrstofficial.com/)
+- [Joe Delaney Fitness](http://www.jd-fitness.com/About)
 
 ## Credits and Acknowledgements 
 - I would like to say thank you to my mentor Oluwaseun Owonikoko, who has been of immense help and kindness during my coding journey so far.
