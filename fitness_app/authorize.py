@@ -9,7 +9,9 @@ stripe.api_key="sk_test_4eC39HqLyjWDarjtT1zdp7dc"
 # login  of user is verified by querying by email and id is returned
 def login_authorize(request):
     try:
-        token_user = request.session['username']
+        token_user = request.session['username'] if 'username' in request.session else ''
+        if len(token_user) == 0: 
+            return {"success": False, "_id": None,'cart_price':0.00}
         cart_price = request.session['cart_price'] if 'cart_price' in request.session else 0.00
         check_user = Customer.objects.filter(username=token_user).exists()
         check_email = Customer.objects.filter(email=token_user).exists()
