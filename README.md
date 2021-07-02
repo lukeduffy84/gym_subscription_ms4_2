@@ -29,7 +29,7 @@ the 'Testimonials' page, which will show the customer feedback from each the web
 
 - Allows logged in users to click on the login button where they will be subsequently be brought to the login site of the page and asked to input their details. 
 - Allows logged in user to click on the shopping bag icon to view products already added to bag and 'Grand Total'.
-- Allows logged 'Super Users' (this will be default for deployed version for all users logged in as to show this feature to examiners) to click on 'My Account' button and click on the 'My Product' button where super users can add, edit and delte the products they want to sell on the website. 
+- Allows logged 'Super Users' to click on 'My Account' button and click on the 'My Product' button where super users can add, edit and delte the products they want to sell on the website. 
 - Allows logged in user to sign out of their profile on Luke Duffy Fitness by clicking on the 'Log Out' button within the 'My Account' section on the Navbar.
 
 
