@@ -8,3 +8,7 @@ gunicorn
 requests
 stripe
 PyJWT
+python-dotenv==0.10.3
+django-extensions
+whitenoise
+django-allauth==0.41.0
