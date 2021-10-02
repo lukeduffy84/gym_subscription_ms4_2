@@ -41,6 +41,8 @@ For my website I used the 'Canva' Pallete generator service to ensure a understa
 
 ![Imgur](https://imgur.com/36f0GuB.jpg)
 
+## Database Schema
+![Imgur](https://imgur.com/xv6gRIZ.jpg)
 
 ## Technoliges Used
 
