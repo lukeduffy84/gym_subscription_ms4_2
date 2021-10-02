@@ -42,6 +42,8 @@ For my website I used the 'Canva' Pallete generator service to ensure a understa
 ![Imgur](https://imgur.com/36f0GuB.jpg)
 
 ## Database Schema
+The website is made up of The site is made up of four apps: Bla, bla, bla, bla . They contain the following models: bla bla bla bla . Their relationships are shown in the diagram below.
+
 ![Imgur](https://imgur.com/xv6gRIZ.jpg)
 
 ## Technoliges Used
