@@ -134,6 +134,38 @@ allauth. They contain the following models: Customer, Product, Account & SocialA
 a master branch by one author at the following link: (https://github.com/lukeduffy84/gym_subscription_ms4_2)
 - This project has been deployed on Heroku under the following URL: (https://luke-duffy-fitness.herokuapp.com/) 
 
+- To deploy the site please adhere to the following steps:
+
+### Heroku
+- Create a new account on www.heroku.com and click on the ‘Create New App’ button.
+Select the appropriate region. 
+
+- Within the ‘deploy’ tab, click on ‘Deployment method’ and then select Github.
+
+- Then click on the ‘Connect to Github’ button and select the appropriate repository.
+
+### Configuring the database
+
+- On the page for the newly created app, click on ‘Configure Add-ons’ and find the option for Heroku Postgres. Click on the ‘Hobby Dev’ option. 
+
+### Migrating the database
+
+- In Gitpod, use these following commands within the gitpod terminal to connect the newly created database to the project. 
+ - pip3 install dj_database_url
+ - Pip3 install psycopg2-binary
+ - Pip3 freeze > requirements.txt 
+
+- Open the settings.py file and swap out the default database under the DATABASES heading with the new database URL given to you by the heroku application.
+
+- Enter ‘python3 manage.py migrate’, then enter ‘python3 manage.py loaddata db.json’.
+
+- Within settings.py, change the allowed deployed url for the app to ‘Allowed_hosts’ variable. 
+
+- Enter: ‘git push heroku master’ into the terminal to deploy to Heroku
+
+- On the heroku app, click on the ‘deploy tab’ and scroll down to automatic deploys, and then click on the ‘enable’ button. 
+
+
 ## Media 
 - This project has used photos, images and inspiration from the following websites: 
 
