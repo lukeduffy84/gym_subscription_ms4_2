@@ -14,10 +14,9 @@ from django.contrib.auth.decorators import login_required
 
 @verify_request
 def index(request):
-    login_data = login_authorize(request)
     request.session['cart_price'] = request.session['cart_price'] if 'cart_price' in request.session else 0.00
-    islogin = True if login_data["success"] else False
-    print("login_data:", login_data, islogin)
+    islogin = True if request.user is not None else False
+    print("login_data:", islogin)
     return render(request, 'index.html')
 
 
@@ -89,8 +88,7 @@ def customer_signup(request):
 @login_required
 @verify_request
 def add_product(request):
-    login_data = login_authorize(request)
-    csid = login_data['_id']
+    csid = request.user.id
     if request.method == 'POST':
         name = request.POST.get('name')
         image_link = request.POST.get('image_link')
@@ -316,10 +314,9 @@ def update_bag(request):
 @login_required
 @verify_request
 def checkout(request):
-    login_data = login_authorize(request)
     cart_price = request.session['cart_price'] \
         if 'cart_price' in request.session else 0.00
-    islogin = True if login_data["success"] else False
+    islogin = True if request.user is not None else False
     cart_data = request.session['cart']
     if request.method == 'POST':
         county = request.POST.get('country')
