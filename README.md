@@ -77,6 +77,25 @@ allauth. They contain the following models: Customer, Product, Account & Social-
 
 ## Features Testing 
 
+
+### Adding Products to the website
+- Use the superlogin details to add/remove products, 
+   Email: lukeduffy3312@gmail.com 
+   Password: fitness123
+- Log in with above details to login as superuser
+- Does login work correctly?
+- Click on 'My Account' in top right corner.
+- Click on 'My Products' in drop down menu
+- Does it bring you to correct page? (Not accesible to regular users)
+- Click on 'Add New Product' option at the top of the web page
+- Does it bring you to add product page?
+- Enter all product details
+- Click 'add product' 
+- Does product appear in correct section?
+- Does image render correctly?
+
+
+
 ### Navigating the Website
 - Click on 'Supplements' button on Navbar
 - Does it bring you to correct page?
