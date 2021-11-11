@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2 class="logo-font mb-4">Checkout</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6 order-lg-last mb-5">
+                <p class="text-muted">Order Summary</p>
+                <div class="row">
+                    <div class="col-7 offset-2">
+                        <p class="mb-1 mt-0 small text-muted">Item</p>
+                    </div>
+                    <div class="col-3 text-right">
+                        <p class="mb-1 mt-0 small text-muted">Subtotal</p>
+                    </div>
+                </div>
+                {% for item in cart_data.items %}
+                    <div class="row">
+                        <div class="col-2 mb-1">
+                            <a href="{% url "product" item.product.pk %}">
+                                <img class="w-100" src="{{ item.product.image_url }}" alt="{{ item.product.name }}">
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                            <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+                        </div>
+                        <div class="col-3 text-right">
+                            <p class="my-0 small text-muted">${{ item.subtotal|floatformat:2 }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <hr class="my-0">
+                <div class="row text-black text-right">
+                    <div class="col-7 offset-2">
+                        <p class="my-0">Order Total:</p>
+                        <p class="my-0">Delivery:</p>
+                        <p class="my-0">Grand Total:</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="my-0">${{ cart_data.total|floatformat:2 }}</p>
+                        <p class="my-0">FREE</p>
+                        <p class="my-0"><strong>${{ cart_data.total|floatformat:2 }}</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <p class="text-muted">Please fill out the form below to complete your order</p>
+                <form id="payment-form" action="{% url 'checkout' %}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden">
+                    <fieldset class="rounded px-3 mb-5">
+                        <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
+                        <div id="div_id_full_name" class="form-group">
+                            <div class="">
+                                <input type="text" name="full_name" maxlength="50" autofocus="" placeholder="Full Name *" class="stripe-style-input textinput textInput form-control" required="" id="id_full_name">
+                            </div>
+                        </div>
+                        <div id="div_id_email" class="form-group">
+                            <div class="">
+                                <input type="email" name="email" maxlength="254" placeholder="Email Address *" class="stripe-style-input emailinput form-control" required="" id="id_email">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="rounded px-3 mb-5">
+                        <legend class="fieldset-label small text-black px-2 w-auto">Delivery</legend>
+                        <div id="div_id_phone_number" class="form-group">
+                            <div class="">
+                                <input type="text" name="phone_number" maxlength="20" placeholder="Phone Number *" class="stripe-style-input textinput textInput form-control" required="" id="id_phone_number">
+                            </div>
+                        </div>
+                        <div id="div_id_street_address1" class="form-group">
+                            <div class="">
+                                <input type="text" name="street_address1" maxlength="80" placeholder="Street Address 1 *" class="stripe-style-input textinput textInput form-control" required="" id="id_street_address1">
+                            </div>
+                        </div>
+                        <div id="div_id_street_address2" class="form-group">
+                            <div class="">
+                                <input type="text" name="street_address2" maxlength="80" placeholder="Street Address 2" class="stripe-style-input textinput textInput form-control" id="id_street_address2">
+                            </div>
+                        </div>
+                        <div id="div_id_town_or_city" class="form-group">
+                            <div class="">
+                                <input type="text" name="town_or_city" maxlength="40" placeholder="Town or City *" class="stripe-style-input textinput textInput form-control" required="" id="id_town_or_city">
+                            </div>
+                        </div>
+                        <div id="div_id_country" class="form-group">
+                            <div class="">
+                                <select name="country" class="selectpicker countrypicker form-control" required="" id="id_country">
+                                </select>
+                            </div>
+                        </div>
+                        <div id="div_id_postcode" class="form-group">
+                            <div class="">
+                                <input type="text" name="postcode" maxlength="20" placeholder="Postal Code" class="stripe-style-input textinput textInput form-control" id="id_postcode">
+                            </div>
+                        </div>
+
+                        <div class="form-check form-check-inline float-right mr-0">
+                            <label class="form-check-label" for="id-save-info">
+                                <a class="text-info" href="{% url 'register' next='checkout' %}">Create an account</a> or
+                                <a class="text-info" href="{% url 'login' %}">login</a> to save this information
+                            </label>
+                            </label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="px-3">
+                        <legend class="fieldset-label small text-black px-2 w-auto"><strong>Payment</strong></legend>
+                        <!-- A Stripe card element will go here -->
+                        <div class="mt-2 row w-100 ml-lg-5 ml-0 justify-content-center justify-content-lg-start ">
+                            <input type="text" name="cardnumber" class="stripe-style-input textinput textInput form-control" placeholder="Enter 16 digit Card Number" required autofocus >
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+
+                        </div>
+                        <div class="mt-2 row w-100 ml-lg-5 ml-0 justify-content-center justify-content-lg-start ">
+                            <input type="text" class="stripe-style-input textinput textInput form-control" name="expmonth" placeholder="Enter card expiry month MM" required> </div>
+                        <div class="mt-2 row w-100 ml-lg-5 ml-0 justify-content-center justify-content-lg-start ">
+                            <input type="text" class=" stripe-style-input textinput textInput form-control" name="expyear" placeholder="Enter card expiry year date last two digit YY" required>
+                        </div>
+                        <div class="mt-2 row w-100 ml-lg-5 ml-0 justify-content-center justify-content-lg-start ">
+                            <input type="password" class=" stripe-style-input textinput textInput form-control" name="card_cvv" placeholder="Enter card CVV number " required>
+                        </div>
+                    </fieldset>
+                    <div class="submit-button text-right mt-5 mb-2">
+                        <a href = "{% url 'all_products' %}" class="btn btn-outline-black rounded-0">
+                     <span class="icon">
+                     <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                     </span>
+                            <span class="font-weight-bold">Adjust Bag</span>
+                        </a>
+                        <button id="submit-button" class="btn btn-black rounded-0">
+                            <span class="font-weight-bold">Complete Order</span>
+                            <span class="icon">
+                     <i class="fas fa-lock" aria-hidden="true"></i>
+                     </span>
+                        </button>
+                        <p class="small text-danger my-0">
+                        <span class="icon">
+                        <i class="fas fa-exclamation-circle" aria-hidden="true"></i>
+                        </span>
+                            <span>Your card will be charged <strong>${{ cart_data.total|floatformat:2 }}</strong></span>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% block postloadjs %}
+        <script src="{% static 'js/bootstrap-select-country.min.js' %}"></script>
+    {% endblock %}
+{% endblock %}

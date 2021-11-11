@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
+                <div class="image-container my-5">
+                    <a href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH-kjrHShW2t4op7CHKHdnMjDPOsHVWoSTKw&usqp=CAU" target="_blank">
+                        <img class="card-img-top img-fluid" src="{{ product.image_url }}" alt="{{ product.name }}"/>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="product-details-container mb-5 mt-md-5">
+                    <p class="mb-0">{{ product.name }}</p>
+                    <p class="lead mb-0 text-left font-weight-bold">{{ product.price_pretty }}</p>
+
+                    <p class="small mt-1 mb-0">
+                        <a class="text-muted" href="{% url "tag_router" product.category %}">
+                            <i class="fas fa-tag mr-1" aria-hidden="true"></i>
+                            {{ product.category_pretty }}
+                        </a>
+                    </p>
+                    <p class="mt-3">
+                        {{ product.description }}
+                    </p>
+                    <form class="form" action="{% url 'add_to_cart' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}"/>
+                        <div class="form-row">
+                            <div class="col-12">
+                                <p class="mt-3"><strong>Quantity:</strong></p>
+                                <div class="form-group w-50">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button type="button" class="decrement-qty btn btn-black rounded-0" data-item_id="5" id="sub" onclick="decremaentValue()">
+                                                <span class="icon">
+                                                    <i class="fas fa-minus" aria-hidden="true"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <input class="form-control qty_input" type="number" name="quantity" value="1" min="1" max="99" data-item_id="5" id="number"/>
+                                        <div class="input-group-append">
+                                            <button type="button" class="increment-qty btn btn-black rounded-0" data-item_id="5" id="increment-qty_5" id="add" onclick="incrementValue()">
+                                                <span class="icon">
+                                                    <i class="fas fa-plus" aria-hidden="true"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <a href = "{% url 'fitness' view_by='all' %}" class="btn btn-outline-black rounded-0 mt-5">
+                                    <span class="icon">
+                                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="text-uppercase">Keep Shopping</span>
+                                </a>
+                                <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Bag"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block postloadjs %}
+    <script type="text/javascript">
+        function incrementValue()
+        {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value++;
+            document.getElementById('number').value = value;
+        }
+
+        function decremaentValue()
+        {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value--;
+            if (value < 1) {
+                new_val = 1;
+            } else {
+                new_val = value;
+            }
+
+            document.getElementById('number').value = new_val;
+        }
+    </script>
+{% endblock %}

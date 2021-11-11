@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">{{ title }}</h2>
+                <hr class="w-50 mb-1 mx-auto" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="product-container col-10 offset-1">
+                <div class="row mt-1 mb-2">
+                    <div class="col-12 col-md-6 order-md-first">
+                        <p class="text-muted mt-3 text-center text-md-left">{{ products|length }} Product{{ products|length|pluralize }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for p in products %}
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                            <div class="card h-100 border-0">
+                                <a href="{% url 'product' p.id %}">
+                                    <img class="cardImg" src="{{ p.image_url }}" alt="{{ p.name }}"/>
+                                </a>
+                                <div class="card-body pb-0">
+                                    <p class="mb-0">{{ p.name }}</p>
+                                </div>
+                                <div class="card-footer bg-white pt-0 border-0 text-left">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="lead mb-0 text-left font-weight-bold">{{ p.price_pretty }}</p>
+                                            <p class="small mt-1 mb-0">
+                                                <a class="text-muted" href = "{% url 'tag_router' p.category %}">
+                                                    <i class="fas fa-tag mr-1" aria-hidden="true"></i>
+                                                    {{ p.category_pretty }}
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

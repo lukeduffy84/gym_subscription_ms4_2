@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/all.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    {% block extra_meta %}
+    {% endblock %}
+    <title>Home</title>
+</head>
+<body>
+<header class="fixed-header">
+    {% if request.user.is_staff %}
+    <nav style="background-color: yellow">
+        <div class="container">
+            <div class="w-100 text-center d-flex align-items-center justify-content-between py-3">
+                <div><small><b>STAFF MEMBER LOGGED IN</b></small></div>
+                <a href="{% url "product_list" %}">Go to dashboard</a>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+    <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex align-items-center">
+        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
+            <a href="{% url "home" %}" class="nav-link main-link logo-styling">Luke Duffy <span class="underlineTheme"> Fitness</span></a>
+        </div>
+        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+            <form>
+                <div class="input-group w-100">
+                    <input class="form-control border-dark rounded-0" type="text" placeholder="Search Programs"/>
+                    <div class="input-group-append">
+                        <button class="form-control btn btn-black border-dark rounded-0" type="submit">
+                            <span class="icon">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+            <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+                <li class="list-inline-item dropdown">
+                    <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="text-center">
+                            <div>
+                                <i class="fas fa-user fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <p class="my-0">
+                                {% if request.user.is_authenticated %}
+                                    {{ request.user.username }}
+                                {% else %}
+                                    My Account
+                                {% endif %}
+                            </p>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                        {% if request.user.is_authenticated %}
+{#                            <a href="{% url 'products' %}" class="dropdown-item logo-font">My Products</a>#}
+                            <a href="{% url 'logout' %}" class="dropdown-item logo-font">Logout</a>
+                        {% else %}
+                            <a href="{% url 'register' next='home' %}" class="dropdown-item logo-font">Register</a>
+                            <a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
+                        {% endif %}
+
+                    </div>
+                </li>
+                <li class="list-inline-item">
+                    <a class="text-black nav-link" href="{% url 'cart' %}">
+                        <div class="text-center">
+                            <div>
+                                <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <p class="my-0 logo-font">${{request.session.cart_price}}</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light w-100">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="list-unstyled list-inline mt-3 mt-md-0">
+                <li class="list-inline-item">
+                    <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="text-center">
+                            <div>
+                                <i class="fas fa-search fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <p class="my-0">Search</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
+                        <form class="form">
+                            <div class="input-group w-100">
+                                <input class="form-control border border-dark rounded-0" type="text" placeholder="Search our site" />
+                                <div class="input-group-append">
+                                    <button class="
+													form-control form-control
+													btn btn-black
+													border border-dark
+													rounded-0
+												" type="submit">
+												<span class="icon">
+													<i class="fas fa-search" aria-hidden="true"></i>
+												</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li class="list-inline-item dropdown">
+                    <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options-mob" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="text-center">
+                            <div>
+                                <i class="fas fa-user fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <p class="my-0">
+                                {% if request.user.is_authenticated %}
+                                    {{ request.user.username }}
+                                {% else %}
+                                    My Account
+                                {% endif %}
+                            </p>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu border-0" aria-labelledby="user-options-mob">
+                        {% if request.user.is_authenticated %}
+{#                            <a href="{% url 'products' %}" class="dropdown-item logo-font">My Products</a>#}
+                            <a href="{% url 'logout' %}" class="dropdown-item logo-font">Logout</a>
+                        {% else %}
+                            <a href="{% url 'register' next='home' %}" class="dropdown-item logo-font">Register</a>
+                            <a href="{% url 'login' %}" class="dropdown-item logo-font">Login</a>
+                        {% endif %}
+                    </div>
+                </li>
+                <li class="list-inline-item">
+                    <a class="text-black nav-link d-block d-lg-none" href="{% url 'cart' %}">
+                        <div class="text-center">
+                            <div>
+                                <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
+                            </div>
+                            <p class="my-0">${{ cart_price|default_if_none:'0' }}</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="collapse navbar-collapse mt-3" id="main-nav">
+                <ul class="navbar-nav w-auto mx-auto">
+                    <li class="nav-item d-block d-md-none">
+                        <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url "home" %}" id="home-link">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href = "{% url 'all_products' %}" class="logo-font font-weight-bold nav-link text-black mr-5" id="supplements-link" aria-haspopup="true" aria-expanded="false">
+                            All Products
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href = "{% url 'supplements' %}" class="logo-font font-weight-bold nav-link text-black mr-5" id="supplements-link" aria-haspopup="true" aria-expanded="false">
+                            Supplements
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href = "{% url 'merchandise' %}" class="logo-font font-weight-bold nav-link text-black mr-5" id="merchandise-link" aria-haspopup="true" aria-expanded="false">
+                            Merchandise
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href = "{% url 'online_coaching' %}" class="logo-font font-weight-bold nav-link text-black" id="online-coaching-link" aria-haspopup="true" aria-expanded="false">
+                            Online Coaching
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header class="fixed-header">
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
+    </div>
+</div>
+{% block content %}
+{% endblock %}
+<footer class="container-fluid" id="footer">
+    <div class="row text-center text-black footer-icons">
+        <div class="col-12 mt-4">
+            <h3 class="font-weight-bold logo-font">LUKE DUFFY <span class="underlineTheme"> FITNESS</span></h3>
+        </div>
+        <div class="col mt-1">
+            <a
+                    href="https://www.facebook.com/"
+                    target="_blank"
+                    class="footer-icon"
+            >
+                <i class="fab fa-facebook-f social-icon" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.instagram.com/" target="_blank" class="footer-icon">
+                <i class="fab fa-instagram social-icon" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.youtube.com/" class="footer-icon">
+                <i class="fab fa-youtube social-icon" aria-hidden="true"></i>
+            </a>
+            <a href="https://twitter.com/" class="footer-icon">
+                <i class="fab fa-twitter social-icon" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <div class="row text-center text-black footer-links mt-3">
+    </div>
+    <div class="row mt-2 text-center text-black copyright-text">
+        <div class="col">
+            <p>© Luke Duffy Fitness 2021</p>
+        </div>
+    </div>
+</footer>
+{% block postloadjs %}
+{% endblock %}
+</body>
+</html>
