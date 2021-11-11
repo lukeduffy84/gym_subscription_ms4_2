@@ -1,21 +1,22 @@
+import os
 from pathlib import Path
 import json
+from dotenv import load_dotenv
 
-with open("/etc/fitness_config.json") as f:
-    CONFIG = json.load(f)
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = CONFIG["SECRET_KEY"]
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = os.getenv("BASE_URL")
 
-STRIPE_API_KEY = CONFIG["STRIPE_SK"]
+STRIPE_API_KEY = os.getenv("STRIPE_SK")
 
 # Application definition
 
