@@ -30,6 +30,9 @@ class Order(models.Model):
 
     objects = OrderManager()
 
+    class Meta:
+        ordering = ["-created"]
+
     order_id = models.CharField(max_length=15, editable=False, unique=True)
     customer = models.ForeignKey(
         Customer, related_name="orders", on_delete=models.CASCADE, null=True
@@ -41,7 +44,13 @@ class Order(models.Model):
 
     @property
     def total(self):
-        return sum([o.quantity * o.product.price for o in self.items.all()])
+        return sum([o.quantity * o.product.price_cents for o in self.items.all()])
+
+    @property
+    def total_pretty(self):
+        return f"${'%.2f' % (self.total/100)}"
+
+
 
 
 class OrderItem(models.Model):

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.admin.views.decorators import staff_member_required
-from store.models import Product
+from store.models import Product, Order
 from staff.forms import NewProduct
 
 
@@ -48,3 +48,9 @@ def edit_product(request, pid):
 def delete_product(request, pid):
     Product.objects.filter(id=int(pid)).delete()
     return redirect("products")
+
+
+@staff_member_required
+def orders(request):
+    orders = Order.objects.all()
+    return render(request, "orders.html", {"title": "Orders", "orders": orders})
