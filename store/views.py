@@ -5,28 +5,16 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from fitness.settings import BASE_URL, STRIPE_API_KEY
+from store.cart import (
+    render_cart,
+    stripe_line_items_from_cart_items,
+    current_cart_or_default,
+    add_product_to_cart,
+)
 from store.models import Product, Customer, Order
 
-DEFAULT_CART = {"items": [], "total": 0}
 
 stripe.api_key = STRIPE_API_KEY
-
-
-def render_cart(request):
-    cart_data = request.session.get("cart", DEFAULT_CART)
-    items_rendered = []
-    for item in cart_data["items"]:
-        product = Product.objects.get(id=item["product_id"])
-        items_rendered.append(
-            {
-                "product": product,
-                "quantity": item["quantity"],
-                "subtotal": item["subtotal"],
-            }
-        )
-    cart_data_rendered = {"items": items_rendered, "total": cart_data["total"]}
-    # cart_data["items"] = items_rendered
-    return cart_data_rendered
 
 
 def tag_router(request, tag):
@@ -94,7 +82,6 @@ def testimonials(request):
 
 def cart(request):
     cart_data = render_cart(request)
-    print(cart_data)
     return render(request, "cart.html", context={"cart_data": cart_data})
 
 
@@ -102,46 +89,8 @@ def add_to_cart(request):
     if request.method == "POST":
         product = Product.objects.get(id=request.POST["product_id"])
         quantity = int(request.POST.get("quantity", 1))
-        subtotal = product.price_cents * quantity / 100
-        new_item = {
-            "product_id": product.id,
-            "quantity": quantity,
-            "subtotal": subtotal,
-        }
-
-        cart = request.session.get("cart", DEFAULT_CART)
-        cart["items"].append(new_item)
-        cart["total"] += subtotal
-
-        request.session["cart"] = cart
-
+        add_product_to_cart(request, product, quantity)
         return redirect("cart")
-
-
-def update_cart_item(request):
-    return redirect("cart")
-
-
-def remove_cart_item(request, id):
-    return redirect("cart")
-
-
-def stripe_line_items_from_cart_items(cart_items):
-    stripe_items = []
-    for item in cart_items:
-        stripe_items.append(
-            {
-                "price_data": {
-                    "currency": "usd",
-                    "product_data": {
-                        "name": item["product"].name,
-                    },
-                    "unit_amount": item["product"].price_cents,
-                },
-                "quantity": item["quantity"],
-            }
-        )
-    return stripe_items
 
 
 def checkout(request):
