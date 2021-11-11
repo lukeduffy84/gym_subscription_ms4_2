@@ -5,6 +5,11 @@ from staff.forms import NewProduct
 
 
 @staff_member_required
+def dashboard(request):
+    return render(request, "dashboard.html", {"title": "Dashboard"})
+
+
+@staff_member_required
 def product_list(request):
 
     products = Product.objects.all()
