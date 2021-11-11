@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
-from django.db import models
+from django.db import models, transaction
+from secrets import token_urlsafe
 
 
 class Customer(models.Model):
@@ -10,10 +11,33 @@ class Customer(models.Model):
         return self.user.username
 
 
+class OrderManager(models.Manager):
+    def create(self, customer, cart_data, stripe_session_id, shipping_data):
+        with transaction.atomic():
+            order = super().create(
+                order_id=token_urlsafe(8),
+                customer=customer,
+                stripe_session_id=stripe_session_id,
+                shipping=shipping_data,
+            )
+            for item in cart_data["items"]:
+                OrderItem.objects.create(
+                    order=order, product=item["product"], quantity=item["quantity"]
+                )
+
+
 class Order(models.Model):
+
+    objects = OrderManager()
+
+    order_id = models.CharField(max_length=15, editable=False, unique=True)
     customer = models.ForeignKey(
-        Customer, related_name="orders", on_delete=models.CASCADE
+        Customer, related_name="orders", on_delete=models.CASCADE, null=True
     )
+    stripe_session_id = models.CharField(max_length=200)
+    created = models.DateTimeField(auto_now_add=True)
+    shipping = models.JSONField()
+    shipped = models.BooleanField(default=False)
 
     @property
     def total(self):

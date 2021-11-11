@@ -60,12 +60,16 @@
                                     </span>
                                         <span class="text-uppercase">Keep Shopping</span>
                                     </a>
-                                    <a href="{% url 'checkout' %}" class="btn btn-black rounded-0 btn-lg">
-                                        <span class="text-uppercase">Secure Checkout</span>
-                                        <span class="icon">
-                                        <i class="fas fa-lock" aria-hidden="true"></i>
-                                    </span>
-                                    </a>
+                                    <form action="{% url "checkout" %}" method="POST">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-black rounded-0 btn-lg">Checkout</button>
+                                    </form>
+{#                                    <a href="{% url 'checkout' %}" class="btn btn-black rounded-0 btn-lg">#}
+{#                                        <span class="text-uppercase">Secure Checkout</span>#}
+{#                                        <span class="icon">#}
+{#                                        <i class="fas fa-lock" aria-hidden="true"></i>#}
+{#                                    </span>#}
+{#                                    </a>#}
                                 </td>
                             </tr>
                             </tbody>
