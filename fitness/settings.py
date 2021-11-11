@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import json
 from dotenv import load_dotenv
+import django_heroku
 
 load_dotenv()
 
@@ -126,3 +127,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 print("STATIC ROOT:", STATIC_ROOT)
+
+django_heroku.settings(locals())
