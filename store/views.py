@@ -169,8 +169,8 @@ def payment_success(request):
         )
         print(session)
         if session["payment_status"] == "paid":
-            customer = (
-                Customer.objects.get(user=request.user)
+            customer, _ = (
+                Customer.objects.get_or_create(user=request.user)
                 if request.user.is_authenticated
                 else None
             )
@@ -186,7 +186,8 @@ def payment_success(request):
             return render(request, "success.html")
         else:
             redirect("cart")
-    except Exception:
+    except Exception as E:
+        print("ERROR:", E)
         return redirect("home")
 
 
