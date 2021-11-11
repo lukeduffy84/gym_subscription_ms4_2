@@ -52,7 +52,7 @@ def edit_product(request, pid):
 @staff_member_required
 def delete_product(request, pid):
     Product.objects.filter(id=int(pid)).delete()
-    return redirect("products")
+    return redirect("product_list")
 
 
 @staff_member_required
