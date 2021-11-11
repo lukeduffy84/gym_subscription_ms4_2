@@ -41,11 +41,6 @@ def register(request, next="home"):
     return render(request, "register.html", context={"form": form})
 
 
-def fitness(request):
-    products = Product.objects.filter(category="ONLINE_COACHING")
-    return render(request, "products.html")
-
-
 def all_products(request):
     products = Product.objects.all()
     context = {"title": "All Products", "products": products}
@@ -74,10 +69,6 @@ def product_detail(request, id):
     product = Product.objects.get(id=id)
     context = {"title": f"{product.category}: {product.name}", "product": product}
     return render(request, "product_detail.html", context=context)
-
-
-def testimonials(request):
-    return render(request, "testimonials.html")
 
 
 def cart(request):
