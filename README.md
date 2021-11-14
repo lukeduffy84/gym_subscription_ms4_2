@@ -143,18 +143,84 @@ a major refactoring of the overall schema.
 
 ## Deployment
 
-- This project has been stored on Github and is built from 
-a master branch by one author at the following link: (https://github.com/lukeduffy84/gym_subscription_ms4_2)
-- This project has been deployed on Heroku under the following URL: (https://luke-duffy-fitness-store.herokuapp.com/)
-- To deploy the site please adhere to the following steps:
+- Create an account on www.heroku.com and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+- Log the cli in to your heroku account:
+```commandline
+heroku login
+```
+- From within a freshly cloned copy of this repo run:
+```commandline
+heroku create YOUR_APP_NAME
+```
+- This command creates a Heroku "dyno" to which our project can be deployed. It also creates
+a hobby tier postgresql database, which will be used by the project once deployed.
 
-### Heroku
-- Create a new account on www.heroku.com and click on the ‘Create New App’ button.
-Select the appropriate region. 
 
-- Within the ‘deploy’ tab, click on ‘Deployment method’ and then select Github.
+- Once the app is created the command will return 
+the url at which the newly created app is running
+(e.g. https://YOUR_APP_NAME.herokuapp.com/).
+Take note of this url as we will need it in the next step 
+as our BASE_URL environment variable.
 
-- Then click on the ‘Connect to Github’ button and select the appropriate repository.
+
+- Some environment variables must be set in order for the site to run:
+  - ENV: Set to "DEV" or "PRODUCTION".
+  - SECRET_KEY: A long random string. See [django docs](https://docs.djangoproject.com/en/3.2/ref/settings/).
+  - BASE_URL: The url of the heroku app we just created.
+  - ALLOWED_HOST: Same as BASE_URL but without https:// or any slashes (e.g. YOUR_APP_NAME.herokuapp.com)
+  - STRIPE_SK: Your [Stripe secret key](https://stripe.com/docs/keys) (may be a test key eg: sk_test_xxx...)
+
+
+- Use the Heroku CLI to set these variables:
+```commandline
+heroku config:set STRIPE_SK="your_stripe_sk"
+```
+```commandline
+heroku config:set SECRET_KEY="your_secret_key"
+```
+```commandline
+heroku config:set ENV="PRODUCTION"
+```
+```commandline
+heroku config:set BASE_URL="https://YOUR_APP_NAME.herokuapp.com/"
+```
+```commandline
+heroku config:set ALLOWED_HOST="YOUR_APP_NAME.herokuapp.com"
+```
+
+- As the project has the django-heroku package installed, environment variables
+containing database connection parameters are automatically handled.
+
+
+- Push the project files to Heroku:
+```commandline
+git push heroku master
+```
+
+- Heroku will detect a django project, deploy the site and run manage.py collectstatic for us.
+
+- To run initial database migrations and create a superuser account, open a bash session on
+the server by running:
+```commandline
+heroku run bash
+```
+
+- From within this session, run the following commands, following prompts as required:
+```commandline
+python manage.py makemigrations
+```
+```commandline
+python manage.py migrate
+```
+```commandline
+python manage.py createsuperuser
+```
+
+- Your deployment of Luke Duffy Fitness should now be up and running.
+
+
+- For a full walk through of a Django/Heroku deployment, see [this video](https://www.youtube.com/watch?v=6DI_7Zja8Zc).
+
 
 ### Configuring the database
 
