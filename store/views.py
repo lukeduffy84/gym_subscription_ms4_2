@@ -4,6 +4,7 @@ import stripe
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.core.mail import send_mail
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -13,7 +14,8 @@ from store.cart import (
     render_cart,
     stripe_line_items_from_cart_items,
     current_cart_or_default,
-    add_product_to_cart, order_to_cart,
+    add_product_to_cart,
+    order_to_cart,
 )
 from store.models import Product, Customer, Order
 
@@ -43,6 +45,21 @@ def register(request, next="home"):
         else:
             print(form.errors)
     return render(request, "register.html", context={"form": form})
+
+
+def search(request):
+    if request.method == "POST":
+        print("POST")
+        query = request.POST.get("query")
+        products = Product.objects.filter(
+            Q(name__icontains=query)
+            | Q(category__icontains=query)
+            | Q(description__icontains=query)
+        )
+        context = {"title": f"Results for: {query}", "products": products}
+        return render(request, "products.html", context=context)
+    else:
+        return redirect("home")
 
 
 def all_products(request):

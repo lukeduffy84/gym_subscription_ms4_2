@@ -6,6 +6,7 @@ urlpatterns = [
     path("tag_router/<str:tag>/", store_views.tag_router, name="tag_router"),
     path("", store_views.home, name="home"),
     path("supplements", store_views.supplements, name="supplements"),
+    path("search", store_views.search, name="search"),
     path("all_products", store_views.all_products, name="all_products"),
     path("merchandise", store_views.merchandise, name="merchandise"),
     path("online_coaching", store_views.online_coaching, name="online_coaching"),

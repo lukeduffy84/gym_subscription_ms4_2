@@ -33,9 +33,10 @@
             <a href="{% url "home" %}" class="nav-link main-link logo-styling">Luke Duffy <span class="underlineTheme"> Fitness</span></a>
         </div>
         <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-            <form>
+            <form action="{% url "search" %}" method="POST">
+                {% csrf_token %}
                 <div class="input-group w-100">
-                    <input class="form-control border-dark rounded-0" type="text" placeholder="Search Programs"/>
+                    <input class="form-control border-dark rounded-0" type="text" name="query" placeholder="Search Products"/>
                     <div class="input-group-append">
                         <button class="form-control btn btn-black border-dark rounded-0" type="submit">
                             <span class="icon">
@@ -103,9 +104,10 @@
                         </div>
                     </a>
                     <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-                        <form class="form">
+                        <form class="form" method="POST" action="{% url "search" %}">
+                            {% csrf_token %}
                             <div class="input-group w-100">
-                                <input class="form-control border border-dark rounded-0" type="text" placeholder="Search our site" />
+                                <input class="form-control border border-dark rounded-0" name="query" type="text" placeholder="Search our site" />
                                 <div class="input-group-append">
                                     <button class="
 													form-control form-control
