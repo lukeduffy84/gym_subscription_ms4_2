@@ -13,7 +13,7 @@ from store.cart import (
     render_cart,
     stripe_line_items_from_cart_items,
     current_cart_or_default,
-    add_product_to_cart,
+    add_product_to_cart, order_to_cart,
 )
 from store.models import Product, Customer, Order
 
@@ -112,12 +112,11 @@ def payment_success(request):
     )
 
     if session["payment_status"] == "paid":
-        customer, _ = (
-            Customer.objects.get_or_create(user=request.user)
-            if request.user.is_authenticated
-            else None,
-            None,
-        )
+        if request.user.is_authenticated:
+            customer, _ = Customer.objects.get_or_create(user=request.user)
+        else:
+            customer = None
+
         cart_data = render_cart(request)
         order = Order.objects.create(
             customer=customer,
@@ -141,6 +140,18 @@ def payment_success(request):
         return render(request, "success.html")
     else:
         redirect("cart")
+
+
+def customer_orders(request):
+    orders = Order.objects.filter(customer__user=request.user)
+    context = {"title": "My Orders", "orders": orders}
+    return render(request, "customer_orders.html", context=context)
+
+
+def order_again(request, pk):
+    order = Order.objects.get(id=pk)
+    order_to_cart(order, request)
+    return redirect("cart")
 
 
 def stripe_webhook(request):
