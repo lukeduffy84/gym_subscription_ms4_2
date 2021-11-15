@@ -14,7 +14,9 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 BASE_URL = os.getenv("BASE_URL")
 
-if os.getenv("ENV") == "DEV":
+ENV = os.getenv("ENV")
+
+if ENV == "DEV":
     DEBUG = True
     ALLOWED_HOSTS = ["*"]
 else:
@@ -76,12 +78,13 @@ WSGI_APPLICATION = "fitness.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+if ENV == "DEV":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
     }
-}
 
 
 # Password validation
@@ -137,5 +140,5 @@ EMAIL_USE_SSL = True
 EMAIL_HOST_USER = "lukeduffyfitness@mail.com"
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 
-if os.getenv("ENV") == "PRODUCTION":
+if ENV == "PRODUCTION":
     django_heroku.settings(locals())
