@@ -18,7 +18,7 @@ if os.getenv("ENV") == "DEV":
     DEBUG = True
     ALLOWED_HOSTS = ["*"]
 else:
-    DEBUG = False
+    DEBUG = True
     ALLOWED_HOSTS = [os.getenv("ALLOWED_HOST")]
 
 STRIPE_API_KEY = os.getenv("STRIPE_SK")
