@@ -197,7 +197,13 @@ containing database connection parameters are automatically handled.
 git push heroku master
 ```
 
-- Heroku will detect a django project, deploy the site and run manage.py collectstatic for us.
+- Heroku detects a django project, deploys the site files, runs pip install using the project's 
+requirements.txt and runs the manage.py collectstatic command for us.
+
+
+- The site should now be live. However, if we click into of the product sections we will get
+a 500 error. This is because we still need to run database migrations.
+
 
 - To run initial database migrations and create a superuser account, open a bash session on
 the server by running:
@@ -216,32 +222,12 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-- Your deployment of Luke Duffy Fitness should now be up and running.
+- Your deployment of Luke Duffy Fitness should now be fully up and running. Static files are
+being served by whitenoise with no additional configuration required.
+Log in with the superuser just created to start adding products!
 
 
 - For a full walk through of a Django/Heroku deployment, see [this video](https://www.youtube.com/watch?v=6DI_7Zja8Zc).
-
-
-### Configuring the database
-
-- On the page for the newly created app, click on ‘Configure Add-ons’ and find the option for Heroku Postgres. Click on the ‘Hobby Dev’ option. 
-
-### Migrating the database
-
-- In Gitpod, use these following commands within the gitpod terminal to connect the newly created database to the project. 
- - pip3 install dj_database_url
- - Pip3 install psycopg2-binary
- - Pip3 freeze > requirements.txt 
-
-- Open the settings.py file and swap out the default database under the DATABASES heading with the new database URL given to you by the heroku application.
-
-- Enter ‘python3 manage.py migrate’, then enter ‘python3 manage.py loaddata db.json’.
-
-- Within settings.py, change the allowed deployed url for the app to ‘Allowed_hosts’ variable. 
-
-- Enter: ‘git push heroku master’ into the terminal to deploy to Heroku
-
-- On the heroku app, click on the ‘deploy tab’ and scroll down to automatic deploys, and then click on the ‘enable’ button. 
 
 
 ## Media 
@@ -254,6 +240,7 @@ python manage.py createsuperuser
 - [Rob Lipsett Fitness](https://www.roblipsett.com/)
 - [Mike Thurston Fitness](https://thrstofficial.com/)
 - [Joe Delaney Fitness](http://www.jd-fitness.com/About)
+
 
 ## Credits and Acknowledgements 
 - I would like to say thank you to my mentor Oluwaseun Owonikoko, who has been of immense help and kindness during my coding journey so far.
