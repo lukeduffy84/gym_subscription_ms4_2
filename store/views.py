@@ -1,7 +1,11 @@
+from threading import Thread
+
 import stripe
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 
 from fitness.settings import BASE_URL, STRIPE_API_KEY
@@ -115,14 +119,28 @@ def payment_success(request):
                 else None
             )
             cart_data = render_cart(request)
-            Order.objects.create(
+            order = Order.objects.create(
                 customer=customer,
                 cart_data=cart_data,
                 stripe_session_id=stripe_session_id,
                 shipping_data=session["shipping"],
+                email=session["customer_email"],
             )
             request.session.pop("cart")
             request.session.pop("stripe_session_id")
+
+            Thread(
+                target=lambda: send_mail(
+                    f"Order confirmed",
+                    f"Your order #{order.order_id} is confirmed. We'll notify you again once it's on its way.",
+                    '"Luke Duffy Fitness" <lukeduffyfitness@mail.com>',
+                    [order.email],
+                    html_message=render_to_string(
+                        "email_confirmed.html", {"order": order}
+                    ),
+                )
+            ).start()
+
             return render(request, "success.html")
         else:
             redirect("cart")

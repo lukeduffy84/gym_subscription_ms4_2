@@ -169,6 +169,7 @@ as our BASE_URL environment variable.
   - BASE_URL: The url of the heroku app we just created.
   - ALLOWED_HOST: Same as BASE_URL but without https:// or any slashes (e.g. YOUR_APP_NAME.herokuapp.com)
   - STRIPE_SK: Your [Stripe secret key](https://stripe.com/docs/keys) (may be a test key eg: sk_test_xxx...)
+  - EMAIL_HOST_PASSWORD: Password for email account which will send order confirmation emails.
 
 
 - Use the Heroku CLI to set these variables:
@@ -187,9 +188,16 @@ heroku config:set BASE_URL="https://YOUR_APP_NAME.herokuapp.com/"
 ```commandline
 heroku config:set ALLOWED_HOST="YOUR_APP_NAME.herokuapp.com"
 ```
+```commandline
+heroku config:set EMAIL_HOST_PASSWORD="YOUR_EMAIL_PASSWORD"
+```
 
 - As the project has the django-heroku package installed, environment variables
 containing database connection parameters are automatically handled.
+
+
+- Open settings.py and edit EMAIL_HOST, EMAIL_HOST_USER and EMAIL_PORT
+to values that will be compatible with your email provider.
 
 
 - Push the project files to Heroku:

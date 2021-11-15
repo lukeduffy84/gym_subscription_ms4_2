@@ -1,0 +1,11 @@
+{% extends 'email_base.html' %}
+{% block content %}
+<p>Hi there,</p>
+<p>
+    Your order <a href="#">#{{ order.order_id }}</a> has been received
+    and will be on its way to you shortly.
+    We'll notify you again once it's on its way.
+</p>
+<p>Thank you for ordering!</p>
+<p>Luke Duffy Fitness</p>
+{% endblock %}

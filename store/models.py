@@ -39,6 +39,7 @@ class Order(models.Model):
     )
     stripe_session_id = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
+    email = models.EmailField()
     shipping = models.JSONField()
     shipped = models.BooleanField(default=False)
 
