@@ -1,16 +1,20 @@
-{% extends "base_staff.html" %}
-{% load static %}
-{% load bootstrap5 %}
-{% block content %}
-    <div class="form-content">
-        <hr/>
-        <h2 class="logo-font mb-4">{{ title }}</h2>
-        <hr/>
-        <form class="signup" id="signup_form" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <a class="btn btn-outline-black rounded-0" href="{% url 'home' %}">Cancel</a>
-            <button type="submit">Add Product</button>
-        </form>
-    </div>
+{% extends "base_staff.html" %} {% load static %} {% load bootstrap5 %} {% block
+content %}
+<div class="form-content">
+  <hr />
+  <h2 class="logo-font mb-4">{{ title }}</h2>
+  <hr />
+  <form
+    class="signup"
+    id="signup_form"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    {% csrf_token %} {% bootstrap_form form %}
+    <a class="btn btn-outline-black rounded-0" href="{% url 'home' %}"
+      >Cancel</a
+    >
+    <button type="submit">Add Product</button>
+  </form>
+</div>
 {% endblock %}

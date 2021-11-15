@@ -1,23 +1,25 @@
-{% extends "base.html" %}
-{% load static %}
-{% block content %}
-    <div class="container header-container2 h-100">
-        <div class="overlay"></div>
-        <div class="row accounts-row">
-            <div class="col-12 col-md-6">
-                <header class="site-header" id="header">
-                    <h1 class="site-header__title" data-lead-id="site-header-title">Thank you for your Purchase!
-                    </h1>
-                </header>
-                <div class="main-content">
-                    <a href = "{% url 'all_products' %}" class="btn btn-outline-black rounded-0 btn-lg">
-                    <span class="icon">
-                        <i class="fas fa-chevron-left" aria-hidden="true"></i>
-                    </span>
-                        <span class="text-uppercase">Keep Shopping</span>
-                    </a>
-                </div>
-            </div>
-        </div>
+{% extends "base.html" %} {% load static %} {% block content %}
+<div class="container header-container2 h-100">
+  <div class="overlay"></div>
+  <div class="row accounts-row">
+    <div class="col-12 col-md-6">
+      <header class="site-header" id="header">
+        <h1 class="site-header__title" data-lead-id="site-header-title">
+          Thank you for your Purchase!
+        </h1>
+      </header>
+      <div class="main-content">
+        <a
+          href="{% url 'all_products' %}"
+          class="btn btn-outline-black rounded-0 btn-lg"
+        >
+          <span class="icon">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          </span>
+          <span class="text-uppercase">Keep Shopping</span>
+        </a>
+      </div>
     </div>
+  </div>
+</div>
 {% endblock %}

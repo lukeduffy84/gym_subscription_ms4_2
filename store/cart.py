@@ -58,6 +58,5 @@ def stripe_line_items_from_cart_items(cart_items):
 
 
 def order_to_cart(order, request):
-    request.session["cart"] = DEFAULT_CART
     for item in order.items.all():
         add_product_to_cart(request, item.product, item.quantity)
