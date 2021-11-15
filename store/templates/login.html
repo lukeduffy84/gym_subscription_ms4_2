@@ -12,7 +12,7 @@
         </h2>
         <p>
           If you have not created an account yet, then please
-          <a href="">sign up</a> first.
+          <a href="{% url "register" next="home" %}">sign up</a> first.
         </p>
         <form class="login" method="POST" enctype="multipart/form-data">
           {% csrf_token %} {% if form.errors %}
