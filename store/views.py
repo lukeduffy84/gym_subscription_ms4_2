@@ -106,47 +106,41 @@ def checkout(request):
 
 
 def payment_success(request):
-    try:
-        stripe_session_id = request.session.get("stripe_session_id")
-        session = stripe.checkout.Session.retrieve(
-            request.session.get("stripe_session_id"),
+    stripe_session_id = request.session.get("stripe_session_id")
+    session = stripe.checkout.Session.retrieve(
+        request.session.get("stripe_session_id"),
+    )
+
+    if session["payment_status"] == "paid":
+        customer, _ = (
+            Customer.objects.get_or_create(user=request.user)
+            if request.user.is_authenticated
+            else None,
+            None,
         )
-        print(session)
-        if session["payment_status"] == "paid":
-            customer, _ = (
-                Customer.objects.get_or_create(user=request.user)
-                if request.user.is_authenticated
-                else None
-            )
-            cart_data = render_cart(request)
-            order = Order.objects.create(
-                customer=customer,
-                cart_data=cart_data,
-                stripe_session_id=stripe_session_id,
-                shipping_data=session["shipping"],
-                email=session["customer_email"],
-            )
-            request.session.pop("cart")
-            request.session.pop("stripe_session_id")
+        cart_data = render_cart(request)
+        order = Order.objects.create(
+            customer=customer,
+            cart_data=cart_data,
+            stripe_session_id=stripe_session_id,
+            stripe_checkout_data=session.to_dict(),
+        )
+        request.session.pop("cart")
+        request.session.pop("stripe_session_id")
 
-            Thread(
-                target=lambda: send_mail(
-                    f"Order confirmed",
-                    f"Your order #{order.order_id} is confirmed. We'll notify you again once it's on its way.",
-                    '"Luke Duffy Fitness" <lukeduffyfitness@mail.com>',
-                    [order.email],
-                    html_message=render_to_string(
-                        "email_confirmed.html", {"order": order}
-                    ),
-                )
-            ).start()
+        Thread(
+            target=lambda: send_mail(
+                f"Order confirmed",
+                f"Your order #{order.order_id} is confirmed. We'll notify you again once it's on its way.",
+                '"Luke Duffy Fitness" <lukeduffyfitness@mail.com>',
+                [order.email],
+                html_message=render_to_string("email_confirmed.html", {"order": order}),
+            )
+        ).start()
 
-            return render(request, "success.html")
-        else:
-            redirect("cart")
-    except Exception as E:
-        print("ERROR:", E)
-        return redirect("home")
+        return render(request, "success.html")
+    else:
+        redirect("cart")
 
 
 def stripe_webhook(request):

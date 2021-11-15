@@ -12,18 +12,21 @@ class Customer(models.Model):
 
 
 class OrderManager(models.Manager):
-    def create(self, customer, cart_data, stripe_session_id, shipping_data):
+    def create(self, customer, cart_data, stripe_session_id, stripe_checkout_data):
         with transaction.atomic():
             order = super().create(
                 order_id=token_urlsafe(8),
                 customer=customer,
                 stripe_session_id=stripe_session_id,
-                shipping=shipping_data,
+                name=stripe_checkout_data["shipping"]["name"],
+                email=stripe_checkout_data["customer_details"]["email"],
+                shipping_address=stripe_checkout_data["shipping"]["address"]
             )
             for item in cart_data["items"]:
                 OrderItem.objects.create(
                     order=order, product=item["product"], quantity=item["quantity"]
                 )
+        return order
 
 
 class Order(models.Model):
@@ -39,8 +42,9 @@ class Order(models.Model):
     )
     stripe_session_id = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(max_length=150)
     email = models.EmailField()
-    shipping = models.JSONField()
+    shipping_address = models.JSONField()
     shipped = models.BooleanField(default=False)
 
     @property
