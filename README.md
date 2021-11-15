@@ -164,7 +164,7 @@ as our BASE_URL environment variable.
 
 
 - Some environment variables must be set in order for the site to run:
-  - ENV: Set to "DEV" or "PRODUCTION".
+  - ENV: Set this value to "PRODUCTION"
   - SECRET_KEY: A long random string. See [django docs](https://docs.djangoproject.com/en/3.2/ref/settings/).
   - BASE_URL: The url of the heroku app we just created.
   - ALLOWED_HOST: Same as BASE_URL but without https:// or any slashes (e.g. YOUR_APP_NAME.herokuapp.com)

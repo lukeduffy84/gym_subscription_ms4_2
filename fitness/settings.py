@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 BASE_URL = os.getenv("BASE_URL")
 
-if os.getenv("SECRET_KEY") == "DEV":
+if os.getenv("ENV") == "DEV":
     DEBUG = True
     ALLOWED_HOSTS = ["*"]
 else:
@@ -128,11 +128,7 @@ STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-print("STATIC ROOT:", STATIC_ROOT)
-
-django_heroku.settings(locals())
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.mail.com"
@@ -140,3 +136,6 @@ EMAIL_PORT = "465"
 EMAIL_USE_SSL = True
 EMAIL_HOST_USER = "lukeduffyfitness@mail.com"
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+
+if os.getenv("ENV") == "PRODUCTION":
+    django_heroku.settings(locals())
