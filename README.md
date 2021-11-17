@@ -85,48 +85,48 @@ a major refactoring of the overall schema.
 
 #### Guest user to search database for fitness item using search bar available within navbar.
 
-Result: Pass :white_check_mark:, all users, regardless of registered/logged in status, can browse through all products, add to bag and make a purchase.
+Result: Pass :white_check_mark: , all users, regardless of registered/logged in status, can browse through all products, add to bag and make a purchase.
 
 #### Allows guest user to clearly navigate to each of the clearly marked four sections of the website, including 'All Products', 'Supplements', 'Merchandise' and 'Online Coaching'.
 
-Result: Pass,regardless of registered/logged in status, can browse through all sections of website
+Result: Pass :white_check_mark: ,regardless of registered/logged in status, can browse through all sections of website
 
 #### Allows guest user to add a product to the shopping bag.
 
-Result: Pass, guest users can add items to a temporary basket assigned to them, this will stay there even if page refreshed opened in new tab
+Result: Pass :white_check_mark: , guest users can add items to a temporary basket assigned to them, this will stay there even if page refreshed opened in new tab
 
 #### Allows guest user to click on the 'My Account' button and the 'register' button to sign up to Luke Duffy Fitness, where the guest user will be brought to a seperate web page to input their account details.
 
-Result: Pass, guest users can create a username and password to register for the site.
+Result: Pass :white_check_mark: , guest users can create a username and password to register for the site.
 
 #### Registration Username and Password Requirements 
 
-Result: Pass, attempts to circumvent these requirements returns the following prompts to users,
+Result: Pass :white_check_mark: , attempts to circumvent these requirements returns the following prompts to users,
 'This password is too short. It must contain at least 8 characters', 'This password is too common' and 'This password is entirely numerical'
 
 #### Allows guest user to to click on Secure Checkout to purchase the items in their bag, as well as changing the quantities of the the product they wish to purchase.
 
-Result: Pass, guest users can change the quantities for each item as well as move to a secure checkout and payment via stripe
+Result: Pass :white_check_mark: , guest users can change the quantities for each item as well as move to a secure checkout and payment via stripe
 
 ### Logged In Users
 
 #### Allows users to click on 'login button and input their details to succesfully login to website
 
-Result: Pass, website navbar changes also to reflect new options available to logged in account.
+Result: Pass :white_check_mark: , website navbar changes also to reflect new options available to logged in account.
 
 #### Allow logged in users to view their entire order history from Luke Duffy Fitness
 
-Result: Pass,logged in users are presented with a 'My Orders' option in the dropdown menu where they can view their order history with the option of an 'order again' button. 
+Result: Pass :white_check_mark: ,logged in users are presented with a 'My Orders' option in the dropdown menu where they can view their order history with the option of an 'order again' button. 
 
 #### Adding Products to the website
 - Use the staff login details to add/edit/remove products, 
    - Username: luke 
    - Password: testing321
-   Result: Pass, Staff login reveals yellow banner at top of screen that brings staff to dashboard to add/edit/remove products from the website
+   Result: Pass :white_check_mark: , Staff login reveals yellow banner at top of screen that brings staff to dashboard to add/edit/remove products from the website
 
 #### Allows logged in user to sign out of their profile on Luke Duffy Fitness by clicking on the 'Log Out' button within the 'My Account' section on the Navbar.
 
-Result: Pass, website defaults back to guest experience after a user logs out
+Result: Pass :white_check_mark: , website defaults back to guest experience after a user logs out
 
 ## Deployment
 
