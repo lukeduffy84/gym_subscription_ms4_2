@@ -18,14 +18,14 @@ In a world where health, fitness and aesthetics are playing an increasingly impo
 - Allows guest user to clearly navigate to each of the clearly marked four sections of the website, including 'All Products', 'Supplements', 'Merchandise' and 'Online Coaching'.
 - Allows guest user to add a product to the shopping bag.
 - Allows guest user to click on the 'My Account' button and the 'register' button to sign up to Luke Duffy Fitness, where the guest user will be brought to a seperate web page to input their account details. 
-- Allows guest user to click on the shopping bag icon to view products already added to bag and 'Grand Total'.
 - Allows guest user to to click on Secure Checkout to purchase the items in their bag, as well as changing the quantities of the the product they wish to purchase.
 - Allows guest user to subsequently input address and debit card details and complete purchase of products.
 
 
 ### Logged In Users
 
-- Allows logged in users to click on the login button where they will be subsequently be brought to the login site of the page and asked to input their details. 
+
+- Allows users to click on 'login button and input their details to succesfully login.
 - Allows logged in user to click on the shopping bag icon to view products already added to bag and 'Grand Total'.
 - Allows logged in 'Staff' users to navigate to a staff dashboard where they can add, edit and delete the products available on the site. 
 - Allows logged in user to sign out of their profile on Luke Duffy Fitness by clicking on the 'Log Out' button within the 'My Account' section on the Navbar.
@@ -71,75 +71,62 @@ a major refactoring of the overall schema.
 
 # Testing and Deployment 
 
-## Code Validators
+## Used Programs to Validate Code
 
 [![W3C HTML Validator](https://img.shields.io/badge/HTML%20Validator-W3C%20HTML%20Validator-red)](https://validator.w3.org/) 
 [![W3C CSS Validator](https://img.shields.io/badge/CSS%20Validator-W3C%20CSS%20Validator-darkred)](https://jigsaw.w3.org/css-validator/) 
 [![Pep8 Online](https://img.shields.io/badge/Python%20Validator-PEP8%20online-white)](http://pep8online.com/) 
 
-## Features Testing 
 
-### Adding Products to the website
+
+## Testing From User Stories
+
+### Non-registered Users
+
+#### Guest user to search database for fitness item using search bar available within navbar.
+
+Result: Pass, all users, regardless of registered/logged in status, can browse through all products, add to bag and make a purchase.
+
+#### Allows guest user to clearly navigate to each of the clearly marked four sections of the website, including 'All Products', 'Supplements', 'Merchandise' and 'Online Coaching'.
+
+Result: Pass,regardless of registered/logged in status, can browse through all sections of website
+
+#### Allows guest user to add a product to the shopping bag.
+
+Result: Pass, guest users can add items to a temporary basket assigned to them, this will stay there even if page refreshed opened in new tab
+
+#### Allows guest user to click on the 'My Account' button and the 'register' button to sign up to Luke Duffy Fitness, where the guest user will be brought to a seperate web page to input their account details.
+
+Result: Pass, guest users can create a username and password to register for the site.
+
+#### Registration Username and Password Requirements 
+
+Result: Pass, attempts to circumvent these requirements returns the following prompts to users,
+'This password is too short. It must contain at least 8 characters', 'This password is too common' and 'This password is entirely numerical'
+
+#### Allows guest user to to click on Secure Checkout to purchase the items in their bag, as well as changing the quantities of the the product they wish to purchase.
+
+Result: Pass, guest users can change the quantities for each item as well as move to a secure checkout and payment via stripe
+
+## Logged In Users
+
+#### Allows users to click on 'login button and input their details to succesfully login to website
+
+Result: Pass, website navbar changes also to reflect new options available to logged in account.
+
+#### Allow logged in users to view their entire order history from Luke Duffy Fitness
+
+Result: Pass,logged in users are presented with a 'My Orders' option in the dropdown menu where they can view their order history with the option of an 'order again' button. 
+
+#### Adding Products to the website
 - Use the staff login details to add/edit/remove products, 
    - Username: luke 
    - Password: testing321
-- Does login work correctly?
-- Staff users will have an extra nav bar styled in yellow where they can click 'Go to dashboard'
-- Click on 'Go to dashboard'
-- Select 'Add a Product'
-- Does it bring you to add product page?
-- Enter all product details
-- Click 'add product' 
-- Does product appear in correct section?
-- Does image render correctly?
+   Result: Pass, Staff login reveals yellow banner at top of screen that brings staff to dashboard to add/edit/remove products from the website
 
+#### Allows logged in user to sign out of their profile on Luke Duffy Fitness by clicking on the 'Log Out' button within the 'My Account' section on the Navbar.
 
-### Navigating the Website
-- Click on 'All Products' button on Navbar
-- Does it bring you to correct page?
-- Click on 'Supplements' button on Navbar
-- Does it bring you to correct page?
-- Click on 'Merchandise' button on Navbar
-- Does it bring you to correct page?
-- Click on 'Online Coaching' button on Navbar
-- Does it bring you to correct page?
-
-
-### Registering 
-- Click on 'My Account' button on Navbar
-- Does the dropdown menu render?
-- Click on 'Register' button.
-- Does it bring you login page to thus login in with new account details?
-- Does it allow login with the newly created account details?
-
-### Logging In 
-- Click on 'My Account' button on Navbar
-- Click on 'Login' within dropdown menu
-- Does it bring you to login input form?
-- After inputting profile username and password, does it render correct corresponding account?
-- Does the navbar change to include the 'My Products' and 'log out' buttons?
-
-### Adding item to Basket
-- Click on the 'Fitness Programs' button within the Navbar.
-- Does website render correct page?
-- Click on 'Leak Bulking Program'
-- Does correct product page load?
-- When clicking on 'Add to Bag' button, does shopping bad correctly update?
-
-### Purchasing items in Basket  
-- Click on basket icon in top right hand corner of Navbar. 
-- Does website render basket page?
-- Can users clear items from basket?
-- Click on 'Secure Checkout' button.
-- Does website render payments input webpage?
-- Input correct details and click purchase.
-- Is 'Thank You' webpage correctly 
-
-
-### Logging Out 
-- Click on 'Log Out' button on Navbar as an already logged in user
-- Does website return user to home webpage?
-- Does Navbar change to 'Non-logged in' variant with corresponding buttons? 
+Result: Pass, website defaults back to guest experience after a user logs out
 
 ## Deployment
 
