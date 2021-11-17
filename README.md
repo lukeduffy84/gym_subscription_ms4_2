@@ -85,7 +85,7 @@ a major refactoring of the overall schema.
 
 #### Guest user to search database for fitness item using search bar available within navbar.
 
-Result: Pass, all users, regardless of registered/logged in status, can browse through all products, add to bag and make a purchase.
+Result: Pass :white_check_mark:, all users, regardless of registered/logged in status, can browse through all products, add to bag and make a purchase.
 
 #### Allows guest user to clearly navigate to each of the clearly marked four sections of the website, including 'All Products', 'Supplements', 'Merchandise' and 'Online Coaching'.
 
@@ -108,7 +108,7 @@ Result: Pass, attempts to circumvent these requirements returns the following pr
 
 Result: Pass, guest users can change the quantities for each item as well as move to a secure checkout and payment via stripe
 
-## Logged In Users
+### Logged In Users
 
 #### Allows users to click on 'login button and input their details to succesfully login to website
 
