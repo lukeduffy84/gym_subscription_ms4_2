@@ -122,6 +122,7 @@ Result: Pass :white_check_mark: ,logged in users are presented with a 'My Orders
 - Use the staff login details to add/edit/remove products, 
    - Username: luke 
    - Password: testing321
+   
    Result: Pass :white_check_mark: , Staff login reveals yellow banner at top of screen that brings staff to dashboard to add/edit/remove products from the website
 
 #### Allows logged in user to sign out of their profile on Luke Duffy Fitness by clicking on the 'Log Out' button within the 'My Account' section on the Navbar.
